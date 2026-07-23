@@ -8,19 +8,20 @@ generator client {
 }
 
 model Pack {
-  id            String   @id @default(cuid())
-  slug          String   @unique
-  title         String
-  tagline       String
-  price         String
-  billingPeriod String   @default("une fois")
-  popularBadge  Boolean  @default(false)
-  features      String   // JSON string of features array
-  description   String
-  audience      String
-  sortOrder     Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  title             String
+  tagline           String
+  price             String
+  billingPeriod     String   @default("une fois")
+  popularBadge      Boolean  @default(false)
+  allowSplitPayment Boolean  @default(true)
+  features          String   // JSON string of features array
+  description       String
+  audience          String
+  sortOrder         Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Project {

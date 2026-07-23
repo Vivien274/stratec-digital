@@ -463,9 +463,16 @@ export default async function HomePage() {
                   <div className="space-y-4">
                     <h3 className="text-xl font-bold text-[#562C2C]">{pack.title}</h3>
                     <p className="text-xs text-slate-500 font-semibold">{pack.audience}</p>
-                    <div className="pt-2 flex items-baseline gap-2">
-                      <span className="text-3xl font-black text-[#562C2C]">{pack.price}</span>
-                      <span className="text-xs text-slate-500 font-medium">({pack.billingPeriod})</span>
+                    <div className="pt-2 flex flex-wrap items-baseline justify-between gap-2">
+                      <div>
+                        <span className="text-3xl font-black text-[#562C2C]">{pack.price}</span>
+                        <span className="text-xs text-slate-500 font-medium ml-1">({pack.billingPeriod})</span>
+                      </div>
+                      {pack.allowSplitPayment !== false && (
+                        <span className="text-[11px] font-semibold text-[#127475] bg-[#F5DFBB]/60 px-2 py-0.5 rounded-md">
+                          3x sans frais
+                        </span>
+                      )}
                     </div>
                     <p className="text-sm text-slate-600 pt-2">{pack.description}</p>
 

@@ -77,14 +77,16 @@ export default async function ServicesTarifsPage() {
                     <p className="text-sm text-slate-500 mt-1">{pack.tagline}</p>
                   </div>
 
-                  <div className="p-4 bg-[#FAF4F2] rounded-2xl border border-slate-200/60 flex items-baseline justify-between">
+                  <div className="p-4 bg-[#FAF4F2] rounded-2xl border border-slate-200/60 flex items-baseline justify-between gap-2">
                     <div>
                       <span className="text-3xl font-extrabold text-[#562C2C]">{pack.price}</span>
                       <span className="text-xs text-slate-500 font-medium ml-2">({pack.billingPeriod})</span>
                     </div>
-                    <span className="text-xs font-semibold text-[#127475] bg-[#F5DFBB]/60 px-2.5 py-1 rounded-md">
-                      Paiement en 3x possible
-                    </span>
+                    {pack.allowSplitPayment !== false && (
+                      <span className="text-xs font-semibold text-[#127475] bg-[#F5DFBB]/60 px-2.5 py-1 rounded-md shrink-0">
+                        Paiement en 3x possible
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-sm text-slate-700 leading-relaxed">{pack.description}</p>

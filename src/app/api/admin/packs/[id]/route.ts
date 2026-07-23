@@ -11,7 +11,22 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
     const { id } = await params;
     const body = await request.json();
-    const { title, tagline, price, billingPeriod, popularBadge, description, audience } = body;
+    const { title, tagline, price, billingPeriod, popularBadge, allowSplitPayment, description, audience, features } = body;
+
+    let featuresJson = "[]";
+    if (Array.isArray(features)) {
+      featuresJson = JSON.stringify(features);
+    } else if (typeof features === "string") {
+      try {
+        // test if already valid JSON array
+        const parsed = JSON.parse(features);
+        featuresJson = Array.isArray(parsed) ? JSON.stringify(parsed) : JSON.stringify([features]);
+      } catch {
+        // split by line if multiline string
+        const lines = features.split("\n").map((l) => l.trim()).filter(Boolean);
+        featuresJson = JSON.stringify(lines);
+      }
+    }
 
     const updatedPack = await prisma.pack.update({
       where: { id },
@@ -21,13 +36,16 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         price,
         billingPeriod,
         popularBadge: Boolean(popularBadge),
+        allowSplitPayment: Boolean(allowSplitPayment),
         description,
         audience,
+        features: featuresJson,
       },
     });
 
     return NextResponse.json({ success: true, pack: updatedPack });
   } catch (error) {
-    return NextResponse.json({ error: "Erreur lors de la mise à jour." }, { status: 500 });
+    console.error("Error updating pack:", error);
+    return NextResponse.json({ error: "Erreur lors de la mise à jour de l'offre." }, { status: 500 });
   }
 }
