@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { CheckCircle2, Star, Sparkles, ArrowRight, Phone, ShieldCheck, HelpCircle } from "lucide-react";
+import { CheckCircle2, Star, Sparkles, ArrowRight, Phone, ShieldCheck, HelpCircle, ExternalLink } from "lucide-react";
 
 export const revalidate = 60; // ISR 60s
 
@@ -126,6 +126,32 @@ export default async function ServicesTarifsPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* BOUTIQUE GUIDES-DIGITAUX.COM BANNER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-[#F5DFBB]/80 via-white to-[#FAF4F2] border-2 border-[#F2542D]/30 p-8 sm:p-12 rounded-3xl shadow-md flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-3 text-center md:text-left">
+            <span className="inline-block px-3.5 py-1 bg-[#F2542D] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs">
+              💡 Quand y&apos;en a plus, y&apos;en a encore !
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#562C2C]">
+              Découvre la boutique en ligne Guides-Digitaux.com
+            </h3>
+            <p className="text-slate-700 text-sm sm:text-base max-w-2xl leading-relaxed">
+              Envie d&apos;outils pratiques supplémentaires ? Retrouve tous nos guides complets, modèles prêts à l&apos;emploi et fiches conseils sur notre boutique officielle.
+            </p>
+          </div>
+          <a
+            href="https://guides-digitaux.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-4 rounded-xl font-extrabold text-sm bg-[#562C2C] hover:bg-[#F2542D] text-white transition-all shadow-md shrink-0 inline-flex items-center gap-2"
+          >
+            <span>Visiter la boutique Guides-Digitaux.com</span>
+            <ExternalLink className="w-4 h-4 text-[#F5DFBB]" />
+          </a>
         </div>
       </section>
 
