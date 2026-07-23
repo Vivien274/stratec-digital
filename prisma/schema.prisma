@@ -1,6 +1,6 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -43,6 +43,20 @@ model Project {
   sortOrder         Int      @default(0)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+}
+
+model FreeResource {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  category     String   @default("Guide PDF") // Guide PDF, Checklist, Modèle, Vidéo
+  description  String
+  image        String?  // Thumbnail / preview image URL
+  downloadUrl  String?  // Direct link or Mailchimp trigger URL
+  mailchimpTag String?  // Mailchimp audience tag / campaign ID
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model LeadMessage {

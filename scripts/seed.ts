@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Starting seed...");
 
-  // Seed Admin User (default login: admin@stratec-digital.com / Stratec2026!)
+  // Seed Admin User (default login: stephanie@stratec-digital.com / Stratec2026!)
   const passwordHash = await bcrypt.hash("Stratec2026!", 10);
   await prisma.adminUser.upsert({
     where: { email: "stephanie@stratec-digital.com" },
@@ -109,6 +109,52 @@ async function main() {
     });
   }
   console.log("📦 Packs created/updated.");
+
+  // Seed Free Resources
+  const freeResources = [
+    {
+      slug: "guide-google-my-business-artisan",
+      title: "Le Guide Ultime de la Fiche Google My Business pour Artisan",
+      category: "Guide PDF",
+      description:
+        "10 étapes simples pour optimiser votre visibilité locale sur Google Maps et capter des clients autour de chez vous sans dépenser un euro.",
+      image: "/images/handmakers.jpg",
+      downloadUrl: "https://www.stratec-digital.com/downloads/guide-google-my-business.pdf",
+      mailchimpTag: "gmb-artisan-pdf",
+      sortOrder: 1,
+    },
+    {
+      slug: "checklist-lancement-site-web",
+      title: "Checklist de Lancement de Votre Site Internet",
+      category: "Checklist",
+      description:
+        "Tout ce qu'il faut vérifier avant la mise en ligne : mentions légales, référencement, affichage mobile et formulaire de contact.",
+      image: "/images/artfolium.jpg",
+      downloadUrl: "https://www.stratec-digital.com/downloads/checklist-site-web.pdf",
+      mailchimpTag: "checklist-site-web",
+      sortOrder: 2,
+    },
+    {
+      slug: "calendrier-contenu-reseaux-sociaux",
+      title: "Calendrier de Contenu Réseaux Sociaux (1 mois d'idées)",
+      category: "Modèle Prêt-à-l'emploi",
+      description:
+        "Des idées de publications prêtes à personnaliser pour montrer votre savoir-faire d'artisan sans vous creuser la tête chaque soir.",
+      image: "/images/spoolio/spoolio.webp",
+      downloadUrl: "https://www.stratec-digital.com/downloads/calendrier-reseaux-sociaux.pdf",
+      mailchimpTag: "calendrier-reseaux",
+      sortOrder: 3,
+    },
+  ];
+
+  for (const resource of freeResources) {
+    await prisma.freeResource.upsert({
+      where: { slug: resource.slug },
+      update: resource,
+      create: resource,
+    });
+  }
+  console.log("🎁 Free resources created/updated.");
 
   // Seed Projects
   const projects = [

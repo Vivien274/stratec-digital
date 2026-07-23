@@ -1,7 +1,7 @@
 import { getAdminSession } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
-import { LayoutDashboard, Inbox, Package, FolderKanban, Globe, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, Inbox, Package, FolderKanban, Download, Globe, ShieldCheck } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -69,6 +69,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             >
               <FolderKanban className="w-4 h-4 text-[#F2542D]" />
               <span>Projets Portfolio</span>
+            </Link>
+
+            <Link
+              href="/admin/resources"
+              className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#F5DFBB] hover:bg-[#452323] hover:text-[#F2542D] transition-colors"
+            >
+              <Download className="w-4 h-4 text-[#F2542D]" />
+              <span>Ressources Gratuites</span>
             </Link>
           </nav>
         </div>

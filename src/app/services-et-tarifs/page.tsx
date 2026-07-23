@@ -19,7 +19,7 @@ export default async function ServicesTarifsPage() {
       
       {/* PAGE HEADER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/80 shadow-sm space-y-6 text-center max-w-4xl mx-auto">
+        <div className="space-y-6 text-center max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5DFBB]/60 text-[#562C2C] border border-[#562C2C]/20 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-4 h-4 text-[#F2542D]" />
             <span>Offres &amp; Tarifs Transparents</span>
@@ -30,6 +30,16 @@ export default async function ServicesTarifsPage() {
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
             4 formules clés-en-main conçues spécifiquement pour les besoins des artisans, créateurs et micro-entrepreneurs.
           </p>
+
+          {/* WORKLOAD REASSURANCE BANNER */}
+          <div className="bg-white border border-[#562C2C]/10 rounded-2xl p-5 mt-6 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-[#F5DFBB] text-[#562C2C] flex items-center justify-center shrink-0 font-extrabold text-lg shadow-xs">
+              💡
+            </div>
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+              <strong className="text-[#562C2C]">Tu n&apos;as pas de textes rédigés ni de photos de studio ?</strong> Pas de panique ! Je t&apos;aide à tout rassembler très simplement depuis ton téléphone sans te prendre de précieux temps sur tes chantiers ou tes créations.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -37,7 +47,13 @@ export default async function ServicesTarifsPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {packs.map((pack) => {
-            const features: string[] = JSON.parse(pack.features);
+            let features: string[] = [];
+            try {
+              features = typeof pack.features === "string" ? JSON.parse(pack.features) : pack.features;
+              if (!Array.isArray(features)) features = [String(pack.features)];
+            } catch {
+              features = pack.features ? [String(pack.features)] : [];
+            }
             return (
               <div
                 key={pack.id}
@@ -97,7 +113,7 @@ export default async function ServicesTarifsPage() {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a
-                    href="tel:+33635259113"
+                    href="tel:+33782404062"
                     className="w-full sm:w-auto py-3.5 px-5 rounded-xl font-bold text-xs text-[#562C2C] bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-3.5 h-3.5 text-[#F2542D]" />

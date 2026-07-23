@@ -13,7 +13,7 @@ export default function AboutPage() {
       
       {/* HEADER SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/80 shadow-sm space-y-6 text-center max-w-4xl mx-auto">
+        <div className="space-y-6 text-center max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5DFBB]/60 text-[#562C2C] border border-[#562C2C]/20 text-xs font-bold uppercase tracking-wider">
             <HeartHandshake className="w-4 h-4 text-[#F2542D]" />
             <span>Mon Histoire &amp; Mon Engagement</span>
@@ -64,6 +64,10 @@ export default function AboutPage() {
               <p>
                 <strong>Chez Stratec-Digital, ma démarche est exactement l&apos;inverse.</strong> Je prends le temps d&apos;écouter votre histoire, de comprendre vos contraintes et de vous proposer des outils simples, sur-mesure et pérennes.
               </p>
+
+              <div className="p-4 bg-[#F5DFBB]/40 border-l-4 border-[#F2542D] rounded-r-2xl text-sm italic font-medium text-[#562C2C]">
+                &quot;Un artisan ou un créateur met ses mains, sa passion et son cœur dans ce qu&apos;il fabrique. Vous méritez qu&apos;on mette le même soin, la même honnêteté et la même bienveillance dans votre communication digitale.&quot;
+              </div>
             </div>
 
             {/* Key Values List */}
@@ -93,11 +97,11 @@ export default function AboutPage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="tel:+33635259113"
+                href="tel:+33782404062"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-[#562C2C] bg-white border border-slate-300 hover:bg-slate-50 transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#F2542D]" />
-                <span>06 35 25 91 13</span>
+                <span>07 82 40 40 62</span>
               </a>
             </div>
           </div>
