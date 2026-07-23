@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 2. Mailchimp API Integration (Upsert member via PUT to handle new and existing subscribers)
+    // 2. Mailchimp API v3 Integration
     const apiKey = process.env.MAILCHIMP_API_KEY;
     const listId = process.env.MAILCHIMP_LIST_ID;
 
@@ -35,25 +35,47 @@ export async function POST(req: Request) {
         const subscriberHash = crypto.createHash("md5").update(trimmedEmail).digest("hex");
         const url = `https://${dc}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}`;
 
+        // Standard Mailchimp HTTP Basic Auth header
+        const authHeader = `Basic ${Buffer.from(`anystring:${apiKey}`).toString("base64")}`;
+
         const mcResponse = await fetch(url, {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${apiKey}`,
+            Authorization: authHeader,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email_address: trimmedEmail,
             status_if_new: "subscribed",
+            status: "subscribed",
             merge_fields: { FNAME: name },
-            tags: ["ressource-gratuite", resourceTitle ? String(resourceTitle).slice(0, 50) : "ressource"],
           }),
         });
 
         if (!mcResponse.ok) {
           const mcError = await mcResponse.text();
-          console.error("Mailchimp API Error Output:", mcError);
+          console.error("Mailchimp API Member Error:", mcError);
         } else {
-          console.log(`✅ Mailchimp subscriber ${trimmedEmail} successfully updated/added with listId ${listId}!`);
+          console.log(`✅ Mailchimp subscriber ${trimmedEmail} successfully added/updated to list ${listId}!`);
+
+          // Add tags via Mailchimp /members/<hash>/tags endpoint
+          if (resourceTitle) {
+            const tagsUrl = `https://${dc}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}/tags`;
+            const cleanTag = String(resourceTitle).slice(0, 50);
+            await fetch(tagsUrl, {
+              method: "POST",
+              headers: {
+                Authorization: authHeader,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                tags: [
+                  { name: "ressource-gratuite", status: "active" },
+                  { name: cleanTag, status: "active" },
+                ],
+              }),
+            });
+          }
         }
       } catch (mcErr) {
         console.error("Mailchimp fetch error:", mcErr);
