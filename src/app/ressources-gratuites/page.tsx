@@ -2,7 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import YellowBrushUnderline from "@/components/YellowBrushUnderline";
 import ResourcesGridClient from "@/components/ResourcesGridClient";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, ExternalLink } from "lucide-react";
 
 export const metadata = {
   title: "Ressources Gratuites • Stratec Digital | Stéphanie ROCQ",
@@ -43,6 +43,30 @@ export default async function FreeResourcesPage() {
 
         {/* Dynamic Client Grid with Modal Mailchimp Capture */}
         <ResourcesGridClient resources={resources} />
+
+        {/* Guides-Digitaux.com Online Shop Banner */}
+        <div className="bg-gradient-to-r from-[#F5DFBB]/80 via-white to-[#FAF4F2] border-2 border-[#F2542D]/30 p-8 sm:p-12 rounded-3xl shadow-md flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="space-y-3 text-center md:text-left">
+            <span className="inline-block px-3.5 py-1 bg-[#F2542D] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs">
+              💡 Quand y&apos;en a plus, y&apos;en a encore !
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#562C2C]">
+              Découvre la boutique en ligne Guides-Digitaux.com
+            </h3>
+            <p className="text-slate-700 text-sm sm:text-base max-w-2xl leading-relaxed">
+              Envie d&apos;aller encore plus loin ? Retrouve tous nos guides complets, modèles prêts à l&apos;emploi et fiches pratiques à télécharger sur notre boutique officielle.
+            </p>
+          </div>
+          <a
+            href="https://guides-digitaux.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-4 rounded-xl font-extrabold text-sm bg-[#562C2C] hover:bg-[#F2542D] text-white transition-all shadow-md shrink-0 inline-flex items-center gap-2"
+          >
+            <span>Visiter la boutique Guides-Digitaux.com</span>
+            <ExternalLink className="w-4 h-4 text-[#F5DFBB]" />
+          </a>
+        </div>
 
         {/* Need custom advice CTA */}
         <div className="bg-[#562C2C] text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">

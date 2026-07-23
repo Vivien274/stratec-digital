@@ -6,13 +6,13 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Starting seed...");
 
-  // Seed Admin User (default login: stephanie@stratec-digital.com / Stratec2026!)
+  // Seed Admin User (default login: stephanie@stratecdigital.com / Stratec2026!)
   const passwordHash = await bcrypt.hash("Stratec2026!", 10);
   await prisma.adminUser.upsert({
-    where: { email: "stephanie@stratec-digital.com" },
+    where: { email: "stephanie@stratecdigital.com" },
     update: { passwordHash },
     create: {
-      email: "stephanie@stratec-digital.com",
+      email: "stephanie@stratecdigital.com",
       passwordHash,
       name: "Stéphanie Rocq",
     },

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2, Shield } from "lucide-react";
 
@@ -193,7 +194,10 @@ export default function ContactForm() {
       <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-[#F5DFBB]/40 p-3 rounded-xl border border-[#562C2C]/5">
         <Shield className="w-4 h-4 text-[#0E9594] shrink-0" />
         <span>
-          🔒 Tes données restent chez moi &mdash; pas de revente, pas de spam. Je suis consultante, pas dealer de bases de données.
+          🔒 Tes données restent chez moi &mdash; pas de revente, pas de spam. Je suis consultante, pas dealer de bases de données. Consulte nos{" "}
+          <Link href="/mentions-legales" className="text-[#127475] font-bold underline hover:text-[#F2542D]">
+            Mentions légales
+          </Link>.
         </span>
       </div>
 

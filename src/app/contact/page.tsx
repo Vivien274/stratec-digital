@@ -128,10 +128,10 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-extrabold text-[#562C2C] text-xs uppercase tracking-wider">Email</h4>
                     <a
-                      href="mailto:stephanie@stratec-digital.com"
+                      href="mailto:stephanie@stratecdigital.com"
                       className="text-[#127475] font-bold hover:underline mt-1 block text-base"
                     >
-                      stephanie@stratec-digital.com
+                      stephanie@stratecdigital.com
                     </a>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export default function ContactPage() {
 
           <div className="pt-2">
             <a
-              href="mailto:stephanie@stratec-digital.com"
+              href="mailto:stephanie@stratecdigital.com"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-[#F2542D] hover:bg-[#d8431f] shadow-lg transition-all transform hover:scale-105"
             >
               <Mail className="w-4 h-4" />

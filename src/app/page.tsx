@@ -3,15 +3,17 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import TradeRotater from "@/components/TradeRotater";
 import YellowBrushUnderline from "@/components/YellowBrushUnderline";
-import { Check, ArrowRight, ShieldCheck, Zap, Eye, Phone, Calendar, HeartHandshake, Compass, Sparkles } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Zap, Eye, Phone, Calendar, HeartHandshake, Compass, Sparkles, Mail } from "lucide-react";
 
 export const revalidate = 60; // ISR 60 seconds
 
 export default async function HomePage() {
-  const packs = await prisma.pack.findMany({
+  const allPacks = await prisma.pack.findMany({
     orderBy: { sortOrder: "asc" },
-    take: 3,
   });
+
+  // Display "sur les réseaux" instead of "coaching-tranquille" on home page
+  const packs = allPacks.filter((p) => p.slug !== "coaching-tranquille").slice(0, 3);
 
   const featuredProjects = await prisma.project.findMany({
     where: { featured: true },
@@ -52,20 +54,20 @@ export default async function HomePage() {
 
   return (
     <div className="overflow-x-hidden bg-[#FAF4F2] text-[#562C2C] pb-16 selection:bg-[#F5DFBB] selection:text-[#562C2C]">
-      
+
       {/* HERO SECTION - CRAFTO DATA ANALYSIS LAYOUT WITH STRATEC BRAND PALETTE */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#F5DFBB]/40 via-[#FAF4F2] to-white pt-10 pb-20 lg:pt-14 lg:pb-28 border-b border-[#562C2C]/10">
-        
+
         {/* Decorative Floating Color Glows */}
         <div className="absolute top-12 left-[15%] w-72 h-72 bg-[#F2542D]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 right-[20%] w-96 h-96 bg-[#0E9594]/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              
+
               {/* Badge Tag: Stéphanie - Stratec Digital */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#562C2C] text-[#F5DFBB] text-xs font-extrabold uppercase tracking-wider shadow-sm">
                 <Compass className="w-3.5 h-3.5 text-[#F2542D] stroke-[2.5]" />
@@ -86,7 +88,7 @@ export default async function HomePage() {
                     <YellowBrushUnderline variant="thick" color="#F2542D" />
                   </span>
                 </h1>
-                
+
                 {/* H2 Sub-headline from WP */}
                 <h2 className="text-xl sm:text-2xl font-bold text-[#127475] tracking-tight leading-snug">
                   Pour les artisans et créateurs qui veulent se lancer sans se perdre
@@ -121,9 +123,9 @@ export default async function HomePage() {
 
             {/* Right Graphic Column with Floating Cards */}
             <div className="lg:col-span-5 relative flex justify-center lg:justify-end z-20">
-              
+
               <div className="relative w-full max-w-md lg:max-w-none">
-                
+
                 {/* Main Hero Card Container */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white border border-[#562C2C]/10 p-3 group">
                   <Image
@@ -134,7 +136,7 @@ export default async function HomePage() {
                     priority
                     className="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500"
                   />
-                  
+
                   {/* Floating Top Badge */}
                   <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-xl border border-[#F5DFBB] flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-[#0E9594]/15 text-[#0E9594] flex items-center justify-center font-bold text-lg">
@@ -170,7 +172,7 @@ export default async function HomePage() {
       {/* SECTION 1: EFFECTIVE BENEFITS ("Et si le digital arrêtait de te donner mal à la tête ?") */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Decorative Image Box */}
           <div className="lg:col-span-5 relative">
             <div className="bg-white p-4 rounded-3xl border border-[#562C2C]/10 shadow-xl relative">
@@ -190,9 +192,9 @@ export default async function HomePage() {
 
           {/* Right Text Content */}
           <div className="lg:col-span-7 space-y-6">
-            
+
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5DFBB] text-[#562C2C] text-xs font-extrabold uppercase tracking-wider border border-[#562C2C]/10">
-              <span>EFFECTIVE BENEFITS</span>
+              <span>Bénéfices</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#562C2C] leading-tight tracking-tight">
@@ -265,12 +267,12 @@ export default async function HomePage() {
       {/* SECTION 2: SERVICES CARDS GRID ("Ce qu'on peut construire ensemble") */}
       <section className="bg-white py-20 border-y border-[#562C2C]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-5xl mx-auto space-y-4 mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#127475]/10 text-[#127475] text-xs font-extrabold uppercase tracking-wider border border-[#127475]/20">
               <span>CE QU&apos;ON PEUT CONSTRUIRE ENSEMBLE</span>
             </div>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#562C2C] leading-tight tracking-tight">
               Pas de formule inutile. Juste ce dont tu as vraiment besoin pour être{" "}
               <span className="relative inline-block font-extrabold text-[#562C2C]">
@@ -285,11 +287,10 @@ export default async function HomePage() {
             {services.map((srv, index) => (
               <div
                 key={index}
-                className={`bg-[#FAF4F2]/50 p-8 rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between space-y-6 relative ${
-                  srv.popular
+                className={`bg-[#FAF4F2]/50 p-8 rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between space-y-6 relative ${srv.popular
                     ? "border-[#F2542D] ring-2 ring-[#F2542D]/20 shadow-xl bg-white"
                     : "border-[#562C2C]/10 shadow-sm hover:shadow-md"
-                }`}
+                  }`}
               >
                 {srv.popular && (
                   <span className="absolute -top-3.5 right-6 bg-[#F2542D] text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-xs tracking-wider">
@@ -301,11 +302,11 @@ export default async function HomePage() {
                   <div className="w-14 h-14 rounded-2xl bg-[#F5DFBB]/60 border border-[#562C2C]/10 flex items-center justify-center text-2xl shadow-xs">
                     {srv.icon}
                   </div>
-                  
+
                   <h3 className="text-xl font-bold text-[#562C2C] leading-snug">
                     {srv.title}
                   </h3>
-                  
+
                   <p className="text-slate-600 text-sm leading-relaxed">
                     {srv.description}
                   </p>
@@ -380,7 +381,7 @@ export default async function HomePage() {
 
         {/* Crafto Process Step 6 Style: Big Stroke Numbers 01, 02, 03 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
-          
+
           {/* Step 01 */}
           <div className="bg-white p-8 rounded-3xl border border-[#562C2C]/10 shadow-sm hover:shadow-md transition-all space-y-4 relative overflow-hidden">
             <div className="text-6xl sm:text-7xl font-black text-stroke opacity-30 select-none">
@@ -420,7 +421,7 @@ export default async function HomePage() {
       {/* SECTION 5: FEATURED PACKS / FORMULES */}
       <section className="bg-white py-20 border-y border-[#562C2C]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#127475] bg-[#0E9594]/15 px-3.5 py-1 rounded-full">
@@ -449,11 +450,10 @@ export default async function HomePage() {
               return (
                 <div
                   key={pack.id}
-                  className={`bg-[#FAF4F2]/60 rounded-3xl p-8 border ${
-                    pack.popularBadge
+                  className={`bg-[#FAF4F2]/60 rounded-3xl p-8 border ${pack.popularBadge
                       ? "border-[#F2542D] shadow-xl ring-2 ring-[#F2542D]/20 relative bg-white"
                       : "border-[#562C2C]/10 shadow-sm"
-                  } flex flex-col justify-between space-y-6`}
+                    } flex flex-col justify-between space-y-6`}
                 >
                   {pack.popularBadge && (
                     <span className="absolute -top-3.5 right-6 bg-[#F2542D] text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-xs">
@@ -468,7 +468,7 @@ export default async function HomePage() {
                       <span className="text-xs text-slate-500 font-medium">({pack.billingPeriod})</span>
                     </div>
                     <p className="text-sm text-slate-600 pt-2">{pack.description}</p>
-                    
+
                     <ul className="space-y-2.5 text-xs text-slate-700 pt-4 border-t border-[#562C2C]/10">
                       {features.slice(0, 4).map((f, i) => (
                         <li key={i} className="flex items-start gap-2">
@@ -553,7 +553,7 @@ export default async function HomePage() {
       {/* SECTION 7: FINAL CALL TO ACTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
         <div className="bg-[#562C2C] text-white rounded-3xl p-10 sm:p-16 text-center relative overflow-hidden space-y-8 shadow-2xl">
-          
+
           <div className="max-w-2xl mx-auto space-y-4 relative z-10">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
               Prêt.e à faire briller votre savoir-faire en ligne ?
@@ -571,13 +571,13 @@ export default async function HomePage() {
               <Calendar className="w-4 h-4" />
               <span>Réserver mon entretien gratuit</span>
             </Link>
-            <a
-              href="tel:+33782404062"
+            <Link
+              href="/contact"
               className="px-8 py-4 rounded-xl font-bold text-[#F5DFBB] border border-[#F5DFBB]/40 hover:bg-white/10 transition-colors inline-flex items-center gap-2"
             >
-              <Phone className="w-4 h-4 text-[#F2542D]" />
-              <span>Appeler le 07 82 40 40 62</span>
-            </a>
+              <Mail className="w-4 h-4 text-[#F2542D]" />
+              <span>Me contacter par email</span>
+            </Link>
           </div>
 
         </div>

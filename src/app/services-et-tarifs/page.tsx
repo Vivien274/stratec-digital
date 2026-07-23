@@ -105,20 +105,22 @@ export default async function ServicesTarifsPage() {
                 </div>
 
                 <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-4">
-                  <Link
-                    href={`/contact?pack=${encodeURIComponent(pack.title)}`}
+                  <a
+                    href="https://calendar.app.google/LmPYPbdEHxwC4ewq6"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full sm:w-auto flex-1 text-center py-3.5 px-6 rounded-xl font-bold text-sm bg-[#562C2C] hover:bg-[#F2542D] text-white shadow-md transition-colors flex items-center justify-center gap-2"
                   >
-                    <span>Choisir cette formule</span>
+                    <span>Réserver un rendez-vous</span>
                     <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <a
-                    href="tel:+33782404062"
+                  </a>
+                  <Link
+                    href="/contact"
                     className="w-full sm:w-auto py-3.5 px-5 rounded-xl font-bold text-xs text-[#562C2C] bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center gap-2"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#F2542D]" />
+                    <HelpCircle className="w-3.5 h-3.5 text-[#F2542D]" />
                     <span>Une question ?</span>
-                  </a>
+                  </Link>
                 </div>
 
               </div>

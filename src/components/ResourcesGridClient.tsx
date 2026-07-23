@@ -19,6 +19,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
   const [selectedResource, setSelectedResource] = useState<FreeResourceItem | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [rgpdConsent, setRgpdConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -27,6 +28,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
     setSelectedResource(resource);
     setName("");
     setEmail("");
+    setRgpdConsent(false);
     setSuccess(false);
     setErrorMsg("");
   };
@@ -34,6 +36,10 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedResource) return;
+    if (!rgpdConsent) {
+      setErrorMsg("Veuillez cocher la case d'accord RGPD pour recevoir votre ressource.");
+      return;
+    }
     setLoading(true);
     setErrorMsg("");
 
@@ -185,6 +191,20 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
                       placeholder="stephanie@monmetier.fr"
                       className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0E9594] text-sm bg-white"
                     />
+                  </div>
+
+                  <div className="flex items-start gap-2.5 pt-1 text-left">
+                    <input
+                      type="checkbox"
+                      id="rgpdConsentModal"
+                      required
+                      checked={rgpdConsent}
+                      onChange={(e) => setRgpdConsent(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#F2542D] focus:ring-[#F2542D] shrink-0 cursor-pointer"
+                    />
+                    <label htmlFor="rgpdConsentModal" className="text-xs text-slate-700 font-medium leading-snug cursor-pointer">
+                      J&apos;accepte de recevoir la ressource gratuite et les conseils digitaux de Stratec Digital par email. (Désinscription en 1 clic à tout moment).
+                    </label>
                   </div>
 
                   <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-[#F5DFBB]/40 p-3 rounded-xl">

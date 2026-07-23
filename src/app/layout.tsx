@@ -16,15 +16,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Stratec-Digital • Stéphanie ROCQ | Digitalisation & Accompagnement Artisans",
+  metadataBase: new URL("https://www.stratecdigital.com"),
+  title: {
+    default: "Stratec Digital • Stéphanie ROCQ | Ton GPS du Digital",
+    template: "%s | Stratec Digital",
+  },
   description:
     "Consultante en digitalisation pour artisans, créateurs et micro-entreprises. Création de sites web, visibilité locale Google, réseaux sociaux et accompagnement éthique sans blabla.",
-  keywords: ["stratec-digital", "stéphanie rocq", "digitalisation artisan", "création site web comines", "seo local", "accompagnement digital"],
+  keywords: ["stratecdigital", "stéphanie rocq", "digitalisation artisan", "création site web comines", "seo local", "accompagnement digital"],
   authors: [{ name: "Stéphanie ROCQ" }],
   openGraph: {
-    title: "Stratec-Digital • Stéphanie ROCQ",
+    title: "Stratec Digital • Stéphanie ROCQ",
     description: "Accompagnement digital éthique et sur-mesure pour les artisans et indépendants.",
-    url: "https://www.stratec-digital.com",
+    url: "https://www.stratecdigital.com",
     siteName: "Stratec Digital",
     images: [
       {

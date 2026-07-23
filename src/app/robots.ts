@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/admin/"],
     },
-    sitemap: "https://www.stratec-digital.com/sitemap.xml",
+    sitemap: "https://www.stratecdigital.com/sitemap.xml",
   };
 }
