@@ -1,0 +1,67 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Pack {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  tagline       String
+  price         String
+  billingPeriod String   @default("une fois")
+  popularBadge  Boolean  @default(false)
+  features      String   // JSON string of features array
+  description   String
+  audience      String
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Project {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  title             String
+  clientName        String
+  category          String   // Vitrine, E-commerce, Sur-Mesure, Webdesign
+  year              String
+  summary           String
+  challenge         String?
+  solution          String?
+  result            String?
+  testimonialText   String?
+  testimonialAuthor String?
+  image             String
+  gallery           String?  // JSON array string
+  liveUrl           String?
+  featured          Boolean  @default(false)
+  sortOrder         Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model LeadMessage {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  name            String
+  email           String
+  phone           String?
+  activity        String?  // Plombier, Paysagiste, Coiffeur, etc.
+  serviceInterest String?
+  message         String
+  status          String   @default("NEW") // NEW, READ, CONTACTED, ARCHIVED
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
