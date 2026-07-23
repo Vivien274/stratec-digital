@@ -14,10 +14,10 @@ export default function MentionsLegalesPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-bold text-[#562C2C]">1. Éditeur du site</h2>
             <p>
-              Le site <strong>Stratec-Digital</strong> est édité par Stéphanie ROCQ.<br />
+              Le site <strong>Stratec Digital</strong> est édité par Stéphanie ROCQ.<br />
               <strong>Siège social :</strong> 40 rue du Hoccart, 59560 Comines, France.<br />
               <strong>Téléphone :</strong> 07 82 40 40 62<br />
-              <strong>Email :</strong> stephanie@stratecdigital.com<br />
+              <strong>Email :</strong> stephanie@stratec-digital.com<br />
               <strong>Directrice de la publication :</strong> Stéphanie ROCQ.
             </p>
           </section>
@@ -34,21 +34,21 @@ export default function MentionsLegalesPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-bold text-[#562C2C]">3. Propriété Intellectuelle</h2>
             <p>
-              L&apos;ensemble des éléments (textes, visuels, logos, graphismes) présents sur le site Stratec-Digital sont protégés par le droit d&apos;auteur. Toute reproduction ou réutilisation sans autorisation préalable écrite est strictement interdite.
+              L&apos;ensemble des éléments (textes, visuels, logos, graphismes) présents sur le site Stratec Digital sont protégés par le droit d&apos;auteur. Toute reproduction ou réutilisation sans autorisation préalable écrite est strictly interdite.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-lg font-bold text-[#562C2C]">4. Protection des Données Personnelles &amp; RGPD</h2>
             <p>
-              Les données récoltées via le formulaire de contact et les demandes de ressources gratuites sont utilisées exclusivement dans le cadre de la relation commerciale et de l&apos;envoi d&apos;informations utiles par Stratec Digital. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données sur simple demande par email à <a href="mailto:stephanie@stratecdigital.com" className="text-[#127475] font-bold underline">stephanie@stratecdigital.com</a>.
+              Les données récoltées via le formulaire de contact et les demandes de ressources gratuites sont utilisées exclusivement dans le cadre de la relation commerciale et de l&apos;envoi d&apos;informations utiles par Stratec Digital. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données sur simple demande par email à <a href="mailto:stephanie@stratec-digital.com" className="text-[#127475] font-bold underline">stephanie@stratec-digital.com</a>.
             </p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-lg font-bold text-[#562C2C]">5. Contact</h2>
             <p>
-              Pour toute question concernant le site, vous pouvez envoyer un courriel à <a href="mailto:stephanie@stratecdigital.com" className="text-[#127475] font-bold underline">stephanie@stratecdigital.com</a>.
+              Pour toute question concernant le site, vous pouvez envoyer un courriel à <a href="mailto:stephanie@stratec-digital.com" className="text-[#127475] font-bold underline">stephanie@stratec-digital.com</a>.
             </p>
           </section>
         </div>

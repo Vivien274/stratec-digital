@@ -7,7 +7,7 @@ import { Lock, Mail, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("stephanie@stratecdigital.com");
+  const [email, setEmail] = useState("stephanie@stratec-digital.com");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <h1 className="text-2xl font-bold text-[#562C2C] pt-2">Espace Administration</h1>
-          <p className="text-xs text-slate-500">Connectez-vous pour gérer votre site Stratec-Digital</p>
+          <p className="text-xs text-slate-500">Connectez-vous pour gérer votre site Stratec Digital</p>
         </div>
 
         {error && (
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="stephanie@stratecdigital.com"
+                placeholder="stephanie@stratec-digital.com"
                 className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0E9594] focus:outline-none text-slate-900 text-sm"
               />
             </div>
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
 
           <div className="p-3.5 bg-[#F5DFBB]/40 rounded-xl border border-[#562C2C]/20 text-[11px] text-slate-700 space-y-1">
             <p className="font-bold text-[#562C2C]">💡 Identifiants par défaut :</p>
-            <p>Email : <code className="bg-white/80 px-1 rounded text-[#562C2C] font-semibold">stephanie@stratecdigital.com</code></p>
+            <p>Email : <code className="bg-white/80 px-1 rounded text-[#562C2C] font-semibold">stephanie@stratec-digital.com</code></p>
             <p>Mot de passe : <code className="bg-white/80 px-1 rounded text-[#562C2C] font-semibold">Stratec2026!</code></p>
           </div>
 

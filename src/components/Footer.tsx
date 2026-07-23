@@ -92,8 +92,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#F2542D] shrink-0" />
-                <a href="mailto:stephanie@stratecdigital.com" className="hover:text-[#F2542D] transition-colors">
-                  stephanie@stratecdigital.com
+                <a href="mailto:stephanie@stratec-digital.com" className="hover:text-[#F2542D] transition-colors">
+                  stephanie@stratec-digital.com
                 </a>
               </li>
             </ul>
@@ -121,7 +121,7 @@ export default function Footer() {
 
         {/* Bottom Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#F5DFBB]/70 gap-4">
-          <p>© {new Date().getFullYear()} Stratec-Digital • Stéphanie ROCQ. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} Stratec Digital • Stéphanie ROCQ. Tous droits réservés.</p>
           <div className="flex items-center gap-6">
             <Link href="/mentions-legales" className="hover:text-[#F2542D] transition-colors">
               Mentions Légales

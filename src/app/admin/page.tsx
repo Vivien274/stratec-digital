@@ -32,7 +32,7 @@ export default async function AdminDashboardPage() {
             Bonjour, {session.name} 👋
           </h1>
           <p className="text-sm text-slate-500 mt-1">
-            Bienvenue sur votre espace d&apos;administration Stratec-Digital.
+            Bienvenue sur votre espace d&apos;administration Stratec Digital.
           </p>
         </div>
         <Link

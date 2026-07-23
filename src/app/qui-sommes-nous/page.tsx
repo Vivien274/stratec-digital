@@ -4,7 +4,7 @@ import { ShieldCheck, HeartHandshake, ArrowRight, MapPin, Award, Phone } from "l
 
 export const metadata = {
   title: "Qui sommes-nous • Stratec Digital | Stéphanie ROCQ",
-  description: "Découvrez l'histoire de Stéphanie ROCQ et l'engagement éthique de Stratec-Digital auprès des artisans et créateurs.",
+  description: "Découvrez l'histoire de Stéphanie ROCQ et l'engagement éthique de Stratec Digital auprès des artisans et créateurs.",
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
             Accompagner les artisans avec écoute, éthique et bienveillance
           </h1>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Stratec-Digital est née d&apos;une volonté claire : rendre la digitalisation accessible, compréhensible et épanouissante pour chaque artisan et créateur d&apos;entreprise.
+            Stratec Digital est née d&apos;une volonté claire : rendre la digitalisation accessible, compréhensible et épanouissante pour chaque artisan et créateur d&apos;entreprise.
           </p>
         </div>
       </section>
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-3xl font-extrabold text-[#562C2C]">
-              Pourquoi avoir créé Stratec-Digital ?
+              Pourquoi avoir créé Stratec Digital ?
             </h2>
             <div className="prose prose-slate text-slate-600 space-y-4 text-base leading-relaxed">
               <p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
                 Devis exorbitants, jargon incompréhensible, contrats d&apos;engagement étouffants... Beaucoup finissaient par renoncer ou par payer très cher des outils qu&apos;ils ne maîtrisaient pas.
               </p>
               <p>
-                <strong>Chez Stratec-Digital, ma démarche est exactement l&apos;inverse.</strong> Je prends le temps d&apos;écouter votre histoire, de comprendre vos contraintes et de vous proposer des outils simples, sur-mesure et pérennes.
+                <strong>Chez Stratec Digital, ma démarche est exactement l&apos;inverse.</strong> Je prends le temps d&apos;écouter votre histoire, de comprendre vos contraintes et de vous proposer des outils simples, sur-mesure et pérennes.
               </p>
 
               <div className="p-4 bg-[#F5DFBB]/40 border-l-4 border-[#F2542D] rounded-r-2xl text-sm italic font-medium text-[#562C2C]">

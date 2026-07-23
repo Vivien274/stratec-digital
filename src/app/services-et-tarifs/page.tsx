@@ -6,7 +6,7 @@ export const revalidate = 60; // ISR 60s
 
 export const metadata = {
   title: "Services & Tarifs • Stratec Digital | Formules Artisans",
-  description: "Découvrez les 4 packs d'accompagnement digital Stratec-Digital pour artisans et indépendants. Tarifs clairs, sans abonnement ni frais cachés.",
+  description: "Découvrez les 4 packs d'accompagnement digital Stratec Digital pour artisans et indépendants. Tarifs clairs, sans abonnement ni frais cachés.",
 };
 
 export default async function ServicesTarifsPage() {
