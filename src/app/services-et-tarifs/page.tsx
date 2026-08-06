@@ -19,7 +19,10 @@ import {
   Clock,
   FileText,
   Smartphone,
-  ShieldCheck
+  ShieldCheck,
+  CreditCard,
+  HeartHandshake,
+  Unlock
 } from "lucide-react";
 
 export const revalidate = 60; // ISR 60s
@@ -49,6 +52,49 @@ export default function ServicesTarifsPage() {
           <p className="text-slate-700 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
             Des accompagnements clés-en-main conçus spécifiquement pour les besoins des artisans, créateurs et micro-entrepreneurs à domicile.
           </p>
+
+          {/* REASSURANCE CARDS GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 text-left">
+            <div className="bg-white rounded-2xl p-5 border border-[#562C2C]/10 shadow-xs hover:shadow-md transition-all space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F5DFBB]/70 text-[#F2542D] flex items-center justify-center font-bold">
+                <CreditCard className="w-5 h-5 text-[#F2542D]" />
+              </div>
+              <h3 className="font-extrabold text-sm text-[#562C2C]">Paiement 3x ou 4x</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Règle tes prestations sereinement sans impacter la trésorerie de ton activité.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-5 border border-[#562C2C]/10 shadow-xs hover:shadow-md transition-all space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#E2F1E7] text-[#0E9594] flex items-center justify-center font-bold">
+                <ShieldCheck className="w-5 h-5 text-[#0E9594]" />
+              </div>
+              <h3 className="font-extrabold text-sm text-[#562C2C]">Zéro Frais Cachés</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Tarifs forfaitaires 100% transparents. Aucun abonnement mensuel forcé.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-5 border border-[#562C2C]/10 shadow-xs hover:shadow-md transition-all space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center font-bold">
+                <Unlock className="w-5 h-5 text-[#0284C7]" />
+              </div>
+              <h3 className="font-extrabold text-sm text-[#562C2C]">100% Propriétaire</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Tu es seul propriétaire de tes outils et formé.e pour les administrer en autonomie.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-5 border border-[#562C2C]/10 shadow-xs hover:shadow-md transition-all space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#FEF3C7] text-[#D97706] flex items-center justify-center font-bold">
+                <HeartHandshake className="w-5 h-5 text-[#D97706]" />
+              </div>
+              <h3 className="font-extrabold text-sm text-[#562C2C]">Interlocutrice Unique</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Un suivi humain de proximité, du vrai sur-mesure sans jargon ni prise de tête.
+              </p>
+            </div>
+          </div>
 
           {/* QUICK JUMP NAVIGATION BAR */}
           <div className="pt-4 flex flex-wrap justify-center gap-3">
