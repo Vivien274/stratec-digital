@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, HeartHandshake, ArrowRight, MapPin, Award, Phone } from "lucide-react";
+import { ShieldCheck, HeartHandshake, ArrowRight, MapPin, Award, Phone, PhoneCall, FileCheck, Layers, Rocket, Clock } from "lucide-react";
 
 export const metadata = {
   title: "Qui sommes-nous • Stratec Digital | Stéphanie ROCQ",
@@ -109,58 +109,124 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* WORK METHODOLOGY */}
+      {/* WORK METHODOLOGY - TIMELINE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#562C2C] text-white rounded-3xl p-10 sm:p-14 space-y-10">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-3xl font-extrabold text-[#F5DFBB]">Comment se déroule notre collaboration ?</h2>
-            <p className="text-slate-200 text-sm">
-              Un processus en 4 étapes simples pour avancer en toute sérénité.
+        <div className="bg-[#562C2C] text-white rounded-3xl p-8 sm:p-14 space-y-12 shadow-2xl relative overflow-hidden">
+          
+          {/* Subtle background decoration */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F2542D]/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="text-center max-w-2xl mx-auto space-y-3 relative z-10">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F5DFBB]/20 text-[#F5DFBB] text-xs font-bold uppercase tracking-wider">
+              <Clock className="w-3.5 h-3.5 text-[#F2542D]" />
+              <span>Méthodologie Étape par Étape</span>
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#F5DFBB] tracking-tight">
+              Comment se déroule notre collaboration ?
+            </h2>
+            <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+              Un parcours fluide, transparent et sans mauvaise surprise, de notre premier contact à ton autonomie totale.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* TIMELINE CONTAINER */}
+          <div className="relative max-w-4xl mx-auto pt-4 pb-2 z-10">
             
-            <div className="bg-[#452323] p-6 rounded-2xl border border-[#6B3B3B] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#F2542D] text-white font-black text-lg flex items-center justify-center">
-                1
-              </div>
-              <h3 className="font-bold text-base text-[#F5DFBB]">Appel Découverte</h3>
-              <p className="text-xs text-slate-200">
-                30 minutes d&apos;échange gratuit pour faire connaissance et cibler exactement tes attentes.
-              </p>
-            </div>
+            {/* VERTICAL TIMELINE LINE */}
+            <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-1 bg-gradient-to-b from-[#F2542D] via-[#F5DFBB] to-[#0E9594] -translate-x-1/2 rounded-full" />
+            <div className="md:hidden absolute left-6 top-8 bottom-8 w-1 bg-gradient-to-b from-[#F2542D] via-[#F5DFBB] to-[#0E9594] rounded-full" />
 
-            <div className="bg-[#452323] p-6 rounded-2xl border border-[#6B3B3B] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#F2542D] text-white font-black text-lg flex items-center justify-center">
-                2
-              </div>
-              <h3 className="font-bold text-base text-[#F5DFBB]">Proposition Clés</h3>
-              <p className="text-xs text-slate-200">
-                Envoi d&apos;un plan d&apos;action clair avec tarif fixe et délais précis.
-              </p>
-            </div>
+            <div className="space-y-12">
+              
+              {/* STEP 1 */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center group">
+                <div className="md:w-1/2 md:pr-12 md:text-right w-full pl-16 md:pl-0 space-y-2">
+                  <span className="inline-block px-3 py-0.5 rounded-full bg-[#F2542D]/20 text-[#F5DFBB] border border-[#F2542D]/40 text-xs font-bold">
+                    Étape 1 • 30 minutes
+                  </span>
+                  <h3 className="text-xl font-bold text-white flex md:justify-end items-center gap-2">
+                    <span>Appel Découverte &amp; Écoute</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Un échange téléphonique ou en visioconférence totalement gratuit et sans engagement pour faire connaissance, comprendre ton métier, tes besoins réels et tes contraintes au quotidien.
+                  </p>
+                </div>
 
-            <div className="bg-[#452323] p-6 rounded-2xl border border-[#6B3B3B] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#F2542D] text-white font-black text-lg flex items-center justify-center">
-                3
-              </div>
-              <h3 className="font-bold text-base text-[#F5DFBB]">Création &amp; Configuration</h3>
-              <p className="text-xs text-slate-200">
-                Mise en place de tes outils (fiche Google, réseaux, site web) avec retours réguliers.
-              </p>
-            </div>
+                {/* TIMELINE NODE ICON */}
+                <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-12 h-12 rounded-2xl bg-[#F2542D] text-white flex items-center justify-center font-black text-base shadow-lg ring-4 ring-[#562C2C] group-hover:scale-110 transition-transform">
+                  <PhoneCall className="w-5 h-5 text-white" />
+                </div>
 
-            <div className="bg-[#452323] p-6 rounded-2xl border border-[#6B3B3B] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#F2542D] text-white font-black text-lg flex items-center justify-center">
-                4
+                <div className="hidden md:block md:w-1/2 md:pl-12" />
               </div>
-              <h3 className="font-bold text-base text-[#F5DFBB]">Livraison &amp; Support</h3>
-              <p className="text-xs text-slate-200">
-                Explication pas à pas de la prise en main et assistance incluse pendant 15 à 30 jours.
-              </p>
-            </div>
 
+              {/* STEP 2 */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center group">
+                <div className="hidden md:block md:w-1/2 md:pr-12" />
+
+                {/* TIMELINE NODE ICON */}
+                <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-12 h-12 rounded-2xl bg-[#F5DFBB] text-[#562C2C] flex items-center justify-center font-black text-base shadow-lg ring-4 ring-[#562C2C] group-hover:scale-110 transition-transform">
+                  <FileCheck className="w-5 h-5 text-[#562C2C]" />
+                </div>
+
+                <div className="md:w-1/2 md:pl-12 w-full pl-16 md:pl-0 space-y-2">
+                  <span className="inline-block px-3 py-0.5 rounded-full bg-[#F5DFBB]/20 text-[#F5DFBB] border border-[#F5DFBB]/40 text-xs font-bold">
+                    Étape 2 • 24h à 48h
+                  </span>
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <span>Proposition Claire &amp; Sur-Mesure</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Je te transmets une formule adaptée avec un devis clair, un tarif fixe sans abonnement caché, et un calendrier d&apos;intervention bien défini.
+                  </p>
+                </div>
+              </div>
+
+              {/* STEP 3 */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center group">
+                <div className="md:w-1/2 md:pr-12 md:text-right w-full pl-16 md:pl-0 space-y-2">
+                  <span className="inline-block px-3 py-0.5 rounded-full bg-[#127475]/30 text-[#9AEBA3] border border-[#127475]/50 text-xs font-bold">
+                    Étape 3 • 7 à 14 jours
+                  </span>
+                  <h3 className="text-xl font-bold text-white flex md:justify-end items-center gap-2">
+                    <span>Création &amp; Ajustements en Direct</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Mise en place de tes outils (fiche Google, réseaux sociaux, site web). Je t&apos;envoie des points d&apos;avancement réguliers pour valider chaque étape ensemble.
+                  </p>
+                </div>
+
+                {/* TIMELINE NODE ICON */}
+                <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-12 h-12 rounded-2xl bg-[#0E9594] text-white flex items-center justify-center font-black text-base shadow-lg ring-4 ring-[#562C2C] group-hover:scale-110 transition-transform">
+                  <Layers className="w-5 h-5 text-white" />
+                </div>
+
+                <div className="hidden md:block md:w-1/2 md:pl-12" />
+              </div>
+
+              {/* STEP 4 */}
+              <div className="relative flex flex-col md:flex-row items-start md:items-center group">
+                <div className="hidden md:block md:w-1/2 md:pr-12" />
+
+                {/* TIMELINE NODE ICON */}
+                <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-12 h-12 rounded-2xl bg-[#F2542D] text-white flex items-center justify-center font-black text-base shadow-lg ring-4 ring-[#562C2C] group-hover:scale-110 transition-transform">
+                  <Rocket className="w-5 h-5 text-white" />
+                </div>
+
+                <div className="md:w-1/2 md:pl-12 w-full pl-16 md:pl-0 space-y-2">
+                  <span className="inline-block px-3 py-0.5 rounded-full bg-[#F2542D]/20 text-[#F5DFBB] border border-[#F2542D]/40 text-xs font-bold">
+                    Étape 4 • Suivi 30 jours offert
+                  </span>
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <span>Livraison, Formation &amp; Autonomie</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Formation pas-à-pas pour administrer tes outils facilement, remise de tes identifiants 100% propriétaire et assistance réactive pour répondre à tes questions.
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
