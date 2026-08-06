@@ -20,7 +20,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs sm:text-sm text-[#F5DFBB]/80 leading-relaxed">
-              Consultante en digitalisation des entreprises &amp; artisans. Des solutions claires, éthiques et sans blabla pour faire rayonner votre savoir-faire en ligne.
+              Consultante en digitalisation des entreprises &amp; artisans. Des solutions claires, éthiques et sans blabla pour faire rayonner ton savoir-faire en ligne.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -82,7 +82,7 @@ export default function Footer() {
             <ul className="space-y-3 text-xs sm:text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#F2542D] mt-1 shrink-0" />
-                <span>40 rue du Hoccart, 59560 Comines, France</span>
+                <span>Comines, Métropole lilloise et alentours</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#F2542D] shrink-0" />

@@ -27,7 +27,7 @@ export default function RgpdCookiesPage() {
               Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez à tout moment d&apos;un droit d&apos;accès, de rectification et de suppression de vos données personnelles.
             </p>
             <p>
-              Pour exercer ce droit, adressez un message à : <a href="mailto:stephanie@stratecdigital.com" className="text-[#127475] font-bold underline">stephanie@stratecdigital.com</a>.
+              Pour exercer ce droit, adressez un message à : <a href="mailto:stephanie@stratec-digital.com" className="text-[#127475] font-bold underline">stephanie@stratec-digital.com</a>.
             </p>
           </section>
 

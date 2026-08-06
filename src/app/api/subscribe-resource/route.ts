@@ -84,7 +84,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Merci ! Votre inscription est bien enregistrée. Vérifiez votre boîte mail sous peu.",
+      message: "Merci ! Ton inscription est bien enregistrée. Vérifie ta boîte mail sous peu.",
       leadId: lead.id,
     });
   } catch (error) {

@@ -17,7 +17,7 @@ export default function MentionsLegalesPage() {
               Le site <strong>Stratec Digital</strong> est édité par Stéphanie ROCQ.<br />
               <strong>Siège social :</strong> 40 rue du Hoccart, 59560 Comines, France.<br />
               <strong>Téléphone :</strong> 07 82 40 40 62<br />
-              <strong>Email :</strong> stephanie@stratec-digital.com<br />
+              <strong>Email :</strong> <a href="mailto:stephanie@stratec-digital.com" className="text-[#127475] font-bold underline">stephanie@stratec-digital.com</a><br />
               <strong>Directrice de la publication :</strong> Stéphanie ROCQ.
             </p>
           </section>

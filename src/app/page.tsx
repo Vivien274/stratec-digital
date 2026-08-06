@@ -335,7 +335,7 @@ export default async function HomePage() {
             <span className="text-stroke-light">&bull; RÉSEAUX SOCIAUX</span>
             <span className="text-[#F5DFBB]">&bull; VENDRE EN LIGNE</span>
             <span className="text-[#F2542D]">&bull; TROUVER DES CLIENTS</span>
-            <span className="text-white">&bull; EXPLIQUER VOS SERVICES</span>
+            <span className="text-white">&bull; EXPLIQUER TES SERVICES</span>
             <span className="text-[#0E9594]">&bull; FACILITER LE TRAVAIL</span>
             <span className="text-[#F5DFBB]">&bull; ÉVOLUER</span>
 
@@ -343,7 +343,7 @@ export default async function HomePage() {
             <span className="text-stroke-light">&bull; RÉSEAUX SOCIAUX</span>
             <span className="text-[#F5DFBB]">&bull; VENDRE EN LIGNE</span>
             <span className="text-[#F2542D]">&bull; TROUVER DES CLIENTS</span>
-            <span className="text-white">&bull; EXPLIQUER VOS SERVICES</span>
+            <span className="text-white">&bull; EXPLIQUER TES SERVICES</span>
             <span className="text-[#0E9594]">&bull; FACILITER LE TRAVAIL</span>
             <span className="text-[#F5DFBB]">&bull; ÉVOLUER</span>
           </div>
@@ -563,10 +563,10 @@ export default async function HomePage() {
 
           <div className="max-w-2xl mx-auto space-y-4 relative z-10">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-              Prêt.e à faire briller votre savoir-faire en ligne ?
+              Prêt.e à faire briller ton savoir-faire en ligne ?
             </h2>
             <p className="text-[#F5DFBB] text-base sm:text-lg">
-              Réservez votre appel découverte gratuit de 30 minutes sans aucun engagement. On fait le point sur vos besoins et vos envies.
+              Réserve ton appel découverte gratuit de 30 minutes sans aucun engagement. On fait le point sur tes besoins et tes envies.
             </p>
           </div>
 

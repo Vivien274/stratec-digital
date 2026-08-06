@@ -77,7 +77,7 @@ export async function POST(request: Request) {
   } catch (error: unknown) {
     console.error("Error saving lead message:", error);
     return NextResponse.json(
-      { error: "Une erreur est survenue lors de l'enregistrement de votre message." },
+      { error: "Une erreur est survenue lors de l'enregistrement de ton message." },
       { status: 500 }
     );
   }

@@ -35,8 +35,8 @@ export default function AboutPage() {
             <div className="relative bg-white p-4 rounded-3xl border border-slate-200/80 shadow-lg">
               <div className="relative h-[420px] w-full rounded-2xl overflow-hidden bg-slate-100">
                 <Image
-                  src="/images/BG_Head-Stef.webp"
-                  alt="Stéphanie Rocq"
+                  src="/images/pourquoi-stratec.webp"
+                  alt="Stéphanie Rocq - Fondatrice de Stratec Digital"
                   fill
                   className="object-cover object-top"
                 />
@@ -62,11 +62,11 @@ export default function AboutPage() {
                 Devis exorbitants, jargon incompréhensible, contrats d&apos;engagement étouffants... Beaucoup finissaient par renoncer ou par payer très cher des outils qu&apos;ils ne maîtrisaient pas.
               </p>
               <p>
-                <strong>Chez Stratec Digital, ma démarche est exactement l&apos;inverse.</strong> Je prends le temps d&apos;écouter votre histoire, de comprendre vos contraintes et de vous proposer des outils simples, sur-mesure et pérennes.
+                <strong>Chez Stratec Digital, ma démarche est exactement l&apos;inverse.</strong> Je prends le temps d&apos;écouter ton histoire, de comprendre tes contraintes et de te proposer des outils simples, sur-mesure et pérennes.
               </p>
 
               <div className="p-4 bg-[#F5DFBB]/40 border-l-4 border-[#F2542D] rounded-r-2xl text-sm italic font-medium text-[#562C2C]">
-                &quot;Un artisan ou un créateur met ses mains, sa passion et son cœur dans ce qu&apos;il fabrique. Vous méritez qu&apos;on mette le même soin, la même honnêteté et la même bienveillance dans votre communication digitale.&quot;
+                &quot;Un artisan ou un créateur met ses mains, sa passion et son cœur dans ce qu&apos;il fabrique. Tu mérites qu&apos;on mette le même soin, la même honnêteté et la même bienveillance dans ta communication digitale.&quot;
               </div>
             </div>
 
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <Award className="w-5 h-5 text-[#0E9594] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-bold text-sm text-[#562C2C]">Pédagogie &amp; Formation</h4>
-                  <p className="text-xs text-slate-500">Vous restez maître et autonome de vos outils.</p>
+                  <p className="text-xs text-slate-500">Tu restes maître et autonome de tes outils.</p>
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@ export default function AboutPage() {
               </div>
               <h3 className="font-bold text-base text-[#F5DFBB]">Appel Découverte</h3>
               <p className="text-xs text-slate-200">
-                30 minutes d&apos;échange gratuit pour faire connaissance et cibler exactement vos attentes.
+                30 minutes d&apos;échange gratuit pour faire connaissance et cibler exactement tes attentes.
               </p>
             </div>
 
@@ -147,7 +147,7 @@ export default function AboutPage() {
               </div>
               <h3 className="font-bold text-base text-[#F5DFBB]">Création &amp; Configuration</h3>
               <p className="text-xs text-slate-200">
-                Mise en place de vos outils (fiche Google, réseaux, site web) avec retours réguliers.
+                Mise en place de tes outils (fiche Google, réseaux, site web) avec retours réguliers.
               </p>
             </div>
 

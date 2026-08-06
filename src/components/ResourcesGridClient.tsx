@@ -37,7 +37,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
     e.preventDefault();
     if (!selectedResource) return;
     if (!rgpdConsent) {
-      setErrorMsg("Veuillez cocher la case d'accord RGPD pour recevoir votre ressource.");
+      setErrorMsg("Merci de cocher la case d'accord RGPD pour recevoir ta ressource.");
       return;
     }
     setLoading(true);
@@ -63,7 +63,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
       setSuccess(true);
     } catch (err: unknown) {
       const error = err as Error;
-      setErrorMsg(error.message || "Impossible de valider votre inscription.");
+      setErrorMsg(error.message || "Impossible de valider ton inscription.");
     } finally {
       setLoading(false);
     }

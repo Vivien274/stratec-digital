@@ -12,11 +12,11 @@ export default function FAQPage() {
   const faqs = [
     {
       q: "Est-ce que je serai vraiment autonome pour modifier mon site ?",
-      a: "Absolument. Mon objectif principal est de vous transmettre les clés de votre outil. À la livraison, nous faisons une session de formation ensemble et je vous remets un guide d'utilisation personnalisé. Vous saurez ajouter une photo, modifier un texte ou publier un article sans devoir faire appel à un prestataire.",
+      a: "Absolument. Mon objectif principal est de te transmettre les clés de ton outil. À la livraison, nous faisons une session de formation ensemble et je te remets un guide d'utilisation personnalisé. Tu sauras ajouter une photo, modifier un texte ou publier un article sans devoir faire appel à un prestataire.",
     },
     {
       q: "Y a-t-il des frais cachés ou un abonnement obligatoire ?",
-      a: "Aucun. Vous restez propriétaire à 100% de votre nom de domaine et de votre hébergement. Je ne pratique pas d'abonnements pièges ni d'engagements sur plusieurs années.",
+      a: "Aucun. Tu restes propriétaire à 100% de ton nom de domaine et de ton hébergement. Je ne pratique pas d'abonnements pièges ni d'engagements sur plusieurs années.",
     },
     {
       q: "Combien de temps faut-il pour créer un site internet ?",
@@ -24,15 +24,15 @@ export default function FAQPage() {
     },
     {
       q: "Je n'y connais rien au web, est-ce un problème ?",
-      a: "Pas du tout ! C'est justement pour cela que je suis là. J'utilise un vocabulaire simple, sans jargon technique incompréhensible, et je vous explique chaque étape pas à pas.",
+      a: "Pas du tout ! C'est justement pour cela que je suis là. J'utilise un vocabulaire simple, sans jargon technique incompréhensible, et je t'explique chaque étape pas à pas.",
     },
     {
       q: "Comment fonctionne la fiche Google My Business pour mon activité ?",
-      a: "Je crée et j'optimise votre fiche Google pour que les clients situés autour de chez vous (Comines, Lille et alentours) vous trouvent immédiatement lors d'une recherche locale.",
+      a: "Je crée et j'optimise ta fiche Google pour que les clients situés autour de chez toi (Comines, Lille et alentours) te trouvent immédiatement lors d'une recherche locale.",
     },
     {
       q: "Comment se déroule le premier entretien gratuit ?",
-      a: "C'est un échange téléphonique ou en visio de 30 minutes sans aucun engagement. On fait le point sur votre activité, vos objectifs, et je vous indique la meilleure stratégie adaptée à votre budget.",
+      a: "C'est un échange téléphonique ou en visio de 30 minutes sans aucun engagement. On fait le point sur ton activité, tes objectifs, et je t'indique la meilleure stratégie adaptée à ton budget.",
     },
   ];
 
@@ -56,7 +56,7 @@ export default function FAQPage() {
           </h1>
 
           <p className="text-slate-700 text-lg max-w-2xl mx-auto pt-2">
-            Tout ce que vous devez savoir sur mon approche, mes accompagnements et la gestion de votre visibilité en ligne.
+            Tout ce que tu dois savoir sur mon approche, mes accompagnements et la gestion de ta visibilité en ligne.
           </p>
         </div>
 
@@ -81,9 +81,9 @@ export default function FAQPage() {
         {/* Still have questions CTA */}
         <div className="bg-[#562C2C] text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-xl">
           <div className="space-y-2 max-w-xl mx-auto">
-            <h3 className="text-2xl font-black text-[#F5DFBB]">Une question spécifique sur votre projet ?</h3>
+            <h3 className="text-2xl font-black text-[#F5DFBB]">Une question spécifique sur ton projet ?</h3>
             <p className="text-slate-300 text-sm">
-              Je réponds à toutes vos interrogations avec plaisir lors de notre entretien découverte offert.
+              Je réponds à toutes tes interrogations avec plaisir lors de notre entretien découverte offert.
             </p>
           </div>
 

@@ -6,7 +6,7 @@ import { MapPin, Mail, Phone, Calendar, MessageSquare, ArrowRight, Facebook, Ins
 export const metadata = {
   title: "Contact • Stratec Digital | Stéphanie ROCQ",
   description:
-    "Prenez contact avec Stéphanie ROCQ. Réservez votre entretien découverte gratuit de 30 minutes ou écrivez-moi directement.",
+    "Prends contact avec Stéphanie ROCQ. Réserve ton entretien découverte gratuit de 30 minutes ou écris-moi directement.",
 };
 
 export default function ContactPage() {
@@ -34,7 +34,7 @@ export default function ContactPage() {
   ];
 
   const stats = [
-    { value: "80", label: "Cafés pas bus en lisant vos messages (j'aime pas ça)" },
+    { value: "80", label: "Cafés pas bus en lisant tes messages (j'aime pas ça)" },
     { value: "48h", label: "Délai de réponse garanti même le lundi matin" },
     { value: "0%", label: "Emails automatiques sans âme envoyés depuis la création" },
     { value: "100%", label: "Des clients repartis avec au moins une piste concrète dès le 1er échange" },
@@ -128,10 +128,10 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-extrabold text-[#562C2C] text-xs uppercase tracking-wider">Email</h4>
                     <a
-                      href="mailto:stephanie@stratecdigital.com"
+                      href="mailto:stephanie@stratec-digital.com"
                       className="text-[#127475] font-bold hover:underline mt-1 block text-base"
                     >
-                      stephanie@stratecdigital.com
+                      stephanie@stratec-digital.com
                     </a>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ export default function ContactPage() {
 
           <div className="pt-2">
             <a
-              href="mailto:stephanie@stratecdigital.com"
+              href="mailto:stephanie@stratec-digital.com"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-[#F2542D] hover:bg-[#d8431f] shadow-lg transition-all transform hover:scale-105"
             >
               <Mail className="w-4 h-4" />

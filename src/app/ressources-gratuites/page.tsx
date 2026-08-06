@@ -31,13 +31,13 @@ export default async function FreeResourcesPage() {
           <h1 className="text-4xl sm:text-5xl font-black text-[#562C2C] leading-tight tracking-tight">
             Des ressources conçues pour{" "}
             <span className="relative inline-block px-1">
-              faciliter votre quotidien
+              faciliter ton quotidien
               <YellowBrushUnderline variant="thick" color="#F2542D" />
             </span>
           </h1>
 
           <p className="text-slate-700 text-lg leading-relaxed pt-2">
-            Pas de théorie incompréhensible ni de blabla marketing. Retrouvez ici nos outils et fiches pratiques à recevoir gratuitement dans votre boîte mail pour développer votre présence en ligne en toute autonomie.
+            Pas de théorie incompréhensible ni de blabla marketing. Retrouve ici nos outils et fiches pratiques à recevoir gratuitement dans ta boîte mail pour développer ta présence en ligne en toute autonomie.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default async function FreeResourcesPage() {
               Découvre la boutique en ligne Guides-Digitaux.com
             </h3>
             <p className="text-slate-700 text-sm sm:text-base max-w-2xl leading-relaxed">
-              Envie d&apos;aller encore plus loin ? Retrouve tous nos guides complets, modèles prêts à l&apos;emploi et fiches pratiques à télécharger sur notre boutique officielle.
+              Envie d&apos;aller encore plus loin ? Retrouve nos formations en ligne, nos checklists et nos guides complets sur notre boutique officielle pour rendre le digital simple et accessible à tous.
             </p>
           </div>
           <a
@@ -71,9 +71,9 @@ export default async function FreeResourcesPage() {
         {/* Need custom advice CTA */}
         <div className="bg-[#562C2C] text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-black text-[#F5DFBB]">Vous préférez un accompagnement sur-mesure ?</h3>
+            <h3 className="text-2xl font-black text-[#F5DFBB]">Tu préfères un accompagnement sur-mesure ?</h3>
             <p className="text-slate-300 text-sm max-w-xl">
-              Discutons 30 minutes de votre projet et de vos besoins lors d&apos;un entretien découverte totalement offert.
+              Discutons 30 minutes de ton projet et de tes besoins lors d&apos;un entretien découverte totalement offert.
             </p>
           </div>
           <Link

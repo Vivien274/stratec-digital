@@ -38,7 +38,7 @@ export default function ContactForm() {
 
       setStatus({
         type: "success",
-        text: "Merci ! Votre message a bien été envoyé. Stéphanie vous répond sous 48h.",
+        text: "Merci ! Ton message a bien été envoyé. Stéphanie te répond sous 48h.",
       });
 
       setFormData({
@@ -156,8 +156,8 @@ export default function ContactForm() {
         >
           <option value="Pack Premiers pas digitaux">Pack &quot;Premiers pas digitaux&quot; (300 €)</option>
           <option value="Pack Artisan 100% connecté">Pack &quot;Artisan 100% connecté&quot; (Sur-Mesure)</option>
-          <option value="Pack Coaching tranquille">Pack &quot;Coaching tranquille&quot; (490 €)</option>
-          <option value="Pack Vendre sur les réseaux">Pack &quot;Vendre sur les réseaux&quot; (350 €)</option>
+          <option value="Pack Coaching tranquille">Pack &quot;Coaching tranquille&quot; (400 €)</option>
+          <option value="Pack Vendre sur les réseaux">Pack &quot;Vendre sur les réseaux&quot; (300 €)</option>
           <option value="Autre demande / Échange gratuit">Autre demande / Échange gratuit</option>
         </select>
       </div>
