@@ -29,15 +29,15 @@ export default async function FreeResourcesPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-black text-[#562C2C] leading-tight tracking-tight">
-            Des ressources conçues pour{" "}
+            Ressources{" "}
             <span className="relative inline-block px-1">
-              faciliter ton quotidien
+              gratuites
               <YellowBrushUnderline variant="thick" color="#F2542D" />
             </span>
           </h1>
 
           <p className="text-slate-700 text-lg leading-relaxed pt-2">
-            Pas de théorie incompréhensible ni de blabla marketing. Retrouve ici nos outils et fiches pratiques à recevoir gratuitement dans ta boîte mail pour développer ta présence en ligne en toute autonomie.
+            Retrouve ici nos tutoriels, plans d&apos;action et fiches pratiques à recevoir immédiatement dans ta boîte mail pour développer ta présence en ligne en toute sérénité.
           </p>
         </div>
 

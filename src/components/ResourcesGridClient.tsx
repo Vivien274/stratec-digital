@@ -1,8 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Download, BookOpen, FileText, Video, Sparkles, X, CheckCircle2, Loader2, ArrowRight, Shield } from "lucide-react";
+import Image from "next/image";
+import {
+  Download,
+  BookOpen,
+  FileText,
+  Video,
+  Sparkles,
+  X,
+  CheckCircle2,
+  Loader2,
+  ArrowRight,
+  Shield,
+  AlertTriangle,
+  Send,
+  Lock,
+} from "lucide-react";
 
 interface FreeResourceItem {
   id: string;
@@ -16,56 +30,133 @@ interface FreeResourceItem {
 }
 
 export default function ResourcesGridClient({ resources }: { resources: FreeResourceItem[] }) {
+  // State for inline forms
+  const [retractationEmail, setRetractationEmail] = useState("");
+  const [retractationGdpr, setRetractationGdpr] = useState(false);
+  const [retractationLoading, setRetractationLoading] = useState(false);
+  const [retractationSuccess, setRetractationSuccess] = useState(false);
+  const [retractationError, setRetractationError] = useState("");
+
+  const [rentreeEmail, setRentreeEmail] = useState("");
+  const [rentreeGdpr, setRentreeGdpr] = useState(false);
+  const [rentreeLoading, setRentreeLoading] = useState(false);
+  const [rentreeSuccess, setRentreeSuccess] = useState(false);
+  const [rentreeError, setRentreeError] = useState("");
+
+  // State for modal (other resources)
   const [selectedResource, setSelectedResource] = useState<FreeResourceItem | null>(null);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [rgpdConsent, setRgpdConsent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [modalName, setModalName] = useState("");
+  const [modalEmail, setModalEmail] = useState("");
+  const [modalGdpr, setModalGdpr] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [modalError, setModalError] = useState("");
 
-  const handleOpenModal = (resource: FreeResourceItem) => {
-    setSelectedResource(resource);
-    setName("");
-    setEmail("");
-    setRgpdConsent(false);
-    setSuccess(false);
-    setErrorMsg("");
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Handlers for featured inline forms
+  const handleRetractationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedResource) return;
-    if (!rgpdConsent) {
-      setErrorMsg("Merci de cocher la case d'accord RGPD pour recevoir ta ressource.");
+    if (!retractationGdpr) {
+      setRetractationError("Merci d'accepter les conditions RGPD pour recevoir ton tuto.");
       return;
     }
-    setLoading(true);
-    setErrorMsg("");
+    setRetractationLoading(true);
+    setRetractationError("");
 
     try {
       const res = await fetch("/api/subscribe-resource", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          email,
+          email: retractationEmail,
+          resourceTitle: "Tuto Bouton de rétractation obligatoire",
+          tag: "avocat-tuto",
+          downloadUrl: "/downloads/tuto-bouton-retractation.pdf",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Une erreur est survenue.");
+      setRetractationSuccess(true);
+    } catch (err: unknown) {
+      const error = err as Error;
+      setRetractationError(error.message || "Impossible de valider ton inscription.");
+    } finally {
+      setRetractationLoading(false);
+    }
+  };
+
+  const handleRentreeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!rentreeGdpr) {
+      setRentreeError("Merci d'accepter les conditions RGPD pour recevoir ton plan d'action.");
+      return;
+    }
+    setRentreeLoading(true);
+    setRentreeError("");
+
+    try {
+      const res = await fetch("/api/subscribe-resource", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: rentreeEmail,
+          resourceTitle: "Plan d'action gratuit pour préparer ta rentrée",
+          tag: "plan-rentree",
+          downloadUrl: "/downloads/plan-action-rentree.pdf",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Une erreur est survenue.");
+      setRentreeSuccess(true);
+    } catch (err: unknown) {
+      const error = err as Error;
+      setRentreeError(error.message || "Impossible de valider ton inscription.");
+    } finally {
+      setRentreeLoading(false);
+    }
+  };
+
+  // Handlers for grid modal
+  const handleOpenModal = (resource: FreeResourceItem) => {
+    setSelectedResource(resource);
+    setModalName("");
+    setModalEmail("");
+    setModalGdpr(false);
+    setModalSuccess(false);
+    setModalError("");
+  };
+
+  const handleModalSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedResource) return;
+    if (!modalGdpr) {
+      setModalError("Merci de cocher la case d'accord RGPD pour recevoir ta ressource.");
+      return;
+    }
+    setModalLoading(true);
+    setModalError("");
+
+    try {
+      const res = await fetch("/api/subscribe-resource", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: modalName,
+          email: modalEmail,
           resourceId: selectedResource.id,
           resourceTitle: selectedResource.title,
         }),
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Erreur d'inscription.");
-      }
-
-      setSuccess(true);
+      if (!res.ok) throw new Error(data.error || "Erreur d'inscription.");
+      setModalSuccess(true);
     } catch (err: unknown) {
       const error = err as Error;
-      setErrorMsg(error.message || "Impossible de valider ton inscription.");
+      setModalError(error.message || "Impossible de valider ton inscription.");
     } finally {
-      setLoading(false);
+      setModalLoading(false);
     }
   };
 
@@ -76,188 +167,298 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
       case "Checklist":
         return FileText;
       case "Tuto Vidéo":
+      case "Tuto Réglementaire":
         return Video;
       default:
         return Sparkles;
     }
   };
 
+  // Filter out featured resources from the secondary grid if desired
+  const otherResources = resources.filter(
+    (r) => r.slug !== "tuto-bouton-retractation" && r.slug !== "plan-action-rentree"
+  );
+
   return (
-    <>
-      {/* Resources Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {resources.map((res) => {
-          const IconComponent = getCategoryIcon(res.category);
-          return (
-            <div
-              key={res.id}
-              className="bg-white rounded-3xl p-8 border border-[#562C2C]/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6"
-            >
-              <div className="space-y-4">
-                {res.image && (
-                  <div className="relative w-full h-44 rounded-2xl overflow-hidden bg-slate-100 border border-slate-100">
-                    {/* eslint-disable-next-next/no-img-element */}
-                    <img src={res.image} alt={res.title} className="w-full h-full object-cover" />
-                  </div>
-                )}
+    <div className="space-y-16">
+      {/* FEATURED RESOURCE 1: TUTO BOUTON DE RÉTRACTATION */}
+      <section className="bg-white rounded-3xl p-6 sm:p-10 border border-[#562C2C]/10 shadow-lg hover:shadow-xl transition-all relative overflow-hidden">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="px-3.5 py-1 rounded-full bg-[#F2542D] text-white text-xs font-black uppercase tracking-wider">
+            LOI EUROPÉENNE &bull; OBLIGATOIRE
+          </span>
+          <span className="text-xs font-bold text-[#127475] bg-[#0E9594]/15 px-3 py-1 rounded-full">
+            Tuto Gratuit 🎁
+          </span>
+        </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#127475] bg-[#0E9594]/15 px-3 py-1 rounded-full">
-                    {res.category}
-                  </span>
-                  <span className="text-[11px] text-[#562C2C] font-bold flex items-center gap-1 bg-[#F5DFBB]/60 px-2.5 py-1 rounded-lg">
-                    ⏱️ 5 min &bull; 0 jargon
-                  </span>
-                </div>
-
-                <h2 className="text-xl font-bold text-[#562C2C] leading-snug">
-                  {res.title}
-                </h2>
-
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {res.description}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#562C2C]/10">
-                <button
-                  onClick={() => handleOpenModal(res)}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-bold text-xs bg-[#562C2C] hover:bg-[#F2542D] text-white transition-colors shadow-sm"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Obtenir gratuitement</span>
-                </button>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Image Screenshot */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 group bg-slate-100">
+              <Image
+                src="/images/tuto-retractation.png"
+                alt="Tuto gratuit bouton de rétractation e-commerce Stratec Digital"
+                width={817}
+                height={601}
+                priority
+                className="w-full h-auto object-cover group-hover:scale-103 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+              <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-md border border-[#F5DFBB] flex items-center gap-2">
+                <Shield className="w-4 h-4 text-[#F2542D]" />
+                <span className="text-xs font-extrabold text-[#562C2C]">Conforme Loi Juin 2026</span>
               </div>
             </div>
-          );
-        })}
-      </div>
+          </div>
 
-      {/* Subscription Modal */}
-      {selectedResource && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#FAF4F2] text-[#562C2C] rounded-3xl max-w-lg w-full p-8 shadow-2xl relative space-y-6 border border-[#562C2C]/10">
-            <button
-              onClick={() => setSelectedResource(null)}
-              className="absolute top-6 right-6 p-2 rounded-full text-slate-400 hover:text-[#562C2C] hover:bg-[#F5DFBB]/50 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+          {/* Right Column: Copy & Inline Direct Form */}
+          <div className="lg:col-span-7 space-y-5">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#562C2C] leading-tight">
+              🎁 Ton tuto gratuit pour être en règle dès aujourd&apos;hui
+            </h2>
 
-            {!success ? (
-              <>
-                <div className="space-y-2 pr-8">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#127475] bg-[#0E9594]/15 px-3 py-1 rounded-full inline-block mb-2">
-                    {selectedResource.category}
-                  </span>
-                  <h3 className="text-2xl font-black leading-tight">
-                    Où dois-je t&apos;envoyer ton &quot;{selectedResource.title}&quot; ?
-                  </h3>
-                  <p className="text-xs text-slate-600">
-                    Renseigne ton prénom et ton email pour le recevoir instantanément dans ta boîte de réception.
-                  </p>
-                </div>
+            <p className="text-base font-bold text-[#562C2C] leading-relaxed">
+              Depuis le 19 juin 2026, une nouvelle loi européenne impose à tous les sites e-commerce de proposer un bouton de rétractation visible et accessible.
+            </p>
 
-                {errorMsg && (
+            {/* Alert Box */}
+            <div className="bg-[#562C2C]/5 border-l-4 border-[#F2542D] p-4 rounded-r-xl flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-[#F2542D] shrink-0 mt-0.5" />
+              <p className="text-sm font-black text-[#562C2C]">
+                Sanction si tu t&apos;en fiches : jusqu&apos;à 75 000€ d&apos;amende.
+              </p>
+            </div>
+
+            <p className="text-slate-700 text-sm leading-relaxed">
+              Nom d&apos;une pipe, autant régler ça maintenant — et c&apos;est exactement pour ça que j&apos;ai créé ce tuto. 😄
+            </p>
+
+            <p className="text-sm font-semibold text-[#127475]">
+              👇 Entre ton email, je te l&apos;envoie immédiatement et gratuitement.
+            </p>
+
+            {/* Form standard directly on page (No modal needed!) */}
+            {!retractationSuccess ? (
+              <form onSubmit={handleRetractationSubmit} className="space-y-4 pt-2">
+                {retractationError && (
                   <div className="p-3 rounded-xl bg-red-100 text-red-800 text-xs font-semibold">
-                    {errorMsg}
+                    {retractationError}
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-extrabold text-[#562C2C] uppercase tracking-wider mb-1.5">
-                      Ton Prénom *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="ex: Stéphanie"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0E9594] text-sm bg-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-extrabold text-[#562C2C] uppercase tracking-wider mb-1.5">
-                      Ton Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="stephanie@monmetier.fr"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0E9594] text-sm bg-white"
-                    />
-                  </div>
-
-                  <div className="flex items-start gap-2.5 pt-1 text-left">
-                    <input
-                      type="checkbox"
-                      id="rgpdConsentModal"
-                      required
-                      checked={rgpdConsent}
-                      onChange={(e) => setRgpdConsent(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#F2542D] focus:ring-[#F2542D] shrink-0 cursor-pointer"
-                    />
-                    <label htmlFor="rgpdConsentModal" className="text-xs text-slate-700 font-medium leading-snug cursor-pointer">
-                      J&apos;accepte de recevoir la ressource gratuite et les conseils digitaux de Stratec Digital par email. (Désinscription en 1 clic à tout moment).
-                    </label>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-[#F5DFBB]/40 p-3 rounded-xl">
-                    <Shield className="w-4 h-4 text-[#0E9594] shrink-0" />
-                    <span>
-                      🔒 Pas de spam. Tu recevras directement ton document par email + mes meilleurs conseils.
-                    </span>
-                  </div>
-
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    required
+                    value={retractationEmail}
+                    onChange={(e) => setRetractationEmail(e.target.value)}
+                    placeholder="Entre ton adresse email ici"
+                    className="flex-grow px-4 py-3.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#F2542D] text-sm bg-white shadow-xs"
+                  />
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="w-full py-4 px-6 rounded-xl font-bold text-sm bg-[#562C2C] hover:bg-[#F2542D] text-white shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    disabled={retractationLoading}
+                    className="px-6 py-3.5 rounded-xl font-bold text-sm bg-[#562C2C] hover:bg-[#F2542D] text-white shadow-md transition-all flex items-center justify-center gap-2 shrink-0 disabled:opacity-50"
                   >
-                    {loading ? (
+                    {retractationLoading ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        <span>Envoi en cours...</span>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Envoi...</span>
                       </>
                     ) : (
                       <>
-                        <span>Recevoir gratuitement par email</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <span>Je reçois mon tuto gratuit</span>
+                        <Send className="w-4 h-4 text-[#F5DFBB]" />
                       </>
                     )}
                   </button>
-                </form>
-              </>
-            ) : (
-              <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-[#0E9594]/20 text-[#0E9594] flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-black text-[#562C2C]">C&apos;est parti ! 📩</h3>
-                <p className="text-sm text-slate-700 leading-relaxed max-w-sm mx-auto">
-                  Merci <strong className="text-[#562C2C]">{name}</strong> ! La ressource <strong className="text-[#562C2C]">&quot;{selectedResource.title}&quot;</strong> vient de t&apos;être envoyée à l&apos;adresse <span className="text-[#127475] font-semibold">{email}</span>.
+
+                <div className="flex items-start gap-2 pt-1 text-left">
+                  <input
+                    type="checkbox"
+                    id="gdprRetractation"
+                    required
+                    checked={retractationGdpr}
+                    onChange={(e) => setRetractationGdpr(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#F2542D] focus:ring-[#F2542D] shrink-0 cursor-pointer"
+                  />
+                  <label htmlFor="gdprRetractation" className="text-[11px] text-slate-600 leading-snug cursor-pointer">
+                    En cliquant, j&apos;atteste avoir compris que mes données ne seront pas partagées, et ne seront utilisées que pour me contacter. Aucune donnée ne sera vendue, conformément aux Mentions légales, politiques de confidentialité et RGPD.
+                  </label>
+                </div>
+              </form>
+            ) : (
+              <div className="bg-[#0E9594]/15 border border-[#0E9594]/30 rounded-2xl p-5 text-left space-y-3">
+                <div className="flex items-center gap-2 text-[#0E9594] font-bold text-base">
+                  <CheckCircle2 className="w-5 h-5 shrink-0" />
+                  <span>C&apos;est en route ! 📩</span>
+                </div>
+                <p className="text-xs text-[#562C2C] leading-relaxed">
+                  Merci ! Ton tuto gratuit vient d&apos;être envoyé à l&apos;adresse <strong className="text-[#127475]">{retractationEmail}</strong>. Pense à vérifier tes spams si tu ne le vois pas d&apos;ici 2 minutes.
                 </p>
-                <p className="text-xs text-slate-500 pt-2">
-                  (Pense à vérifier ton dossier Spams ou Indésirables si tu ne le vois pas d&apos;ici 2 minutes !)
-                </p>
-                <div className="pt-4">
-                  <button
-                    onClick={() => setSelectedResource(null)}
-                    className="px-6 py-2.5 rounded-xl font-bold text-xs bg-[#562C2C] text-white hover:bg-[#F2542D] transition-colors"
+                <div className="pt-2">
+                  <a
+                    href="/downloads/tuto-bouton-retractation.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="tuto-bouton-retractation-stratec-digital.pdf"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-xs bg-[#562C2C] hover:bg-[#F2542D] text-white shadow-md transition-all"
                   >
-                    Fermer cette fenêtre
-                  </button>
+                    <Download className="w-4 h-4 text-[#F5DFBB]" />
+                    <span>Télécharger mon PDF directement</span>
+                  </a>
                 </div>
               </div>
             )}
           </div>
         </div>
-      )}
-    </>
+      </section>
+
+      {/* DIVIDER ACCENT */}
+      <div className="relative flex items-center justify-center">
+        <div className="w-full border-t border-[#562C2C]/15" />
+        <span className="absolute bg-[#FAF4F2] px-4 text-[#562C2C]/40 text-xs font-black uppercase tracking-widest">
+          &bull; &bull; &bull;
+        </span>
+      </div>
+
+      {/* FEATURED RESOURCE 2: PLAN D'ACTION RENTRÉE */}
+      <section className="bg-white rounded-3xl p-6 sm:p-10 border border-[#562C2C]/10 shadow-lg hover:shadow-xl transition-all relative overflow-hidden">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="px-3.5 py-1 rounded-full bg-[#127475] text-white text-xs font-black uppercase tracking-wider">
+            ORGANISATION &bull; STRATÉGIE
+          </span>
+          <span className="text-xs font-bold text-[#562C2C] bg-[#F5DFBB] px-3 py-1 rounded-full">
+            Plan d&apos;action offert 🎁
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Copy & Inline Direct Form */}
+          <div className="lg:col-span-7 space-y-5 order-2 lg:order-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#562C2C] leading-tight">
+              🎁 Ton plan d&apos;action gratuit pour préparer ta rentrée
+            </h2>
+
+            <p className="text-base font-bold text-[#562C2C] leading-relaxed">
+              L&apos;été c&apos;est creux pour ton activité ? C&apos;est une chance unique.
+            </p>
+
+            <p className="text-slate-700 text-sm leading-relaxed">
+              Pendant que tes concurrents coupent tout, profite du mois calme pour poser calmement les bases de ta présence en ligne, sans stress et sans jargon.
+            </p>
+
+            {/* Warning Box */}
+            <div className="bg-[#FAF4F2] border-l-4 border-[#127475] p-4 rounded-r-xl space-y-1">
+              <p className="text-sm font-bold text-[#562C2C]">
+                <strong>Le risque si tu ne fais rien :</strong> Arriver en septembre sous l&apos;eau, sans visibilité, et passer à côté des clients qui cherchent tes créations ou ton savoir-faire sur Google.
+              </p>
+            </div>
+
+            <p className="text-slate-700 text-sm leading-relaxed">
+              Nom d&apos;une pipe, autant utiliser ce temps calme maintenant — et c&apos;est exactement pour ça que j&apos;ai créé ce plan d&apos;action en 4 étapes. 😁
+            </p>
+
+            <p className="text-sm font-semibold text-[#127475]">
+              👇 Entre ton email, je te l&apos;envoie immédiatement et gratuitement.
+            </p>
+
+            {/* Inline Form */}
+            {!rentreeSuccess ? (
+              <form onSubmit={handleRentreeSubmit} className="space-y-4 pt-2">
+                {rentreeError && (
+                  <div className="p-3 rounded-xl bg-red-100 text-red-800 text-xs font-semibold">
+                    {rentreeError}
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    required
+                    value={rentreeEmail}
+                    onChange={(e) => setRentreeEmail(e.target.value)}
+                    placeholder="Entre ton adresse email ici"
+                    className="flex-grow px-4 py-3.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#127475] text-sm bg-white shadow-xs"
+                  />
+                  <button
+                    type="submit"
+                    disabled={rentreeLoading}
+                    className="px-6 py-3.5 rounded-xl font-bold text-sm bg-[#562C2C] hover:bg-[#127475] text-white shadow-md transition-all flex items-center justify-center gap-2 shrink-0 disabled:opacity-50"
+                  >
+                    {rentreeLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Envoi...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Je reçois mon plan d&apos;action</span>
+                        <Send className="w-4 h-4 text-[#F5DFBB]" />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="flex items-start gap-2 pt-1 text-left">
+                  <input
+                    type="checkbox"
+                    id="gdprRentree"
+                    required
+                    checked={rentreeGdpr}
+                    onChange={(e) => setRentreeGdpr(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#127475] focus:ring-[#127475] shrink-0 cursor-pointer"
+                  />
+                  <label htmlFor="gdprRentree" className="text-[11px] text-slate-600 leading-snug cursor-pointer">
+                    En cliquant, j&apos;atteste avoir compris que mes données ne seront pas partagées, et ne seront utilisées que pour me contacter. Aucune donnée ne sera vendue, conformément aux Mentions légales, politiques de confidentialité et RGPD.
+                  </label>
+                </div>
+              </form>
+            ) : (
+              <div className="bg-[#0E9594]/15 border border-[#0E9594]/30 rounded-2xl p-5 text-left space-y-3">
+                <div className="flex items-center gap-2 text-[#0E9594] font-bold text-base">
+                  <CheckCircle2 className="w-5 h-5 shrink-0" />
+                  <span>Le plan d&apos;action arrive ! 📩</span>
+                </div>
+                <p className="text-xs text-[#562C2C] leading-relaxed">
+                  Merci ! Ton plan d&apos;action gratuit vient d&apos;être envoyé à <strong className="text-[#127475]">{rentreeEmail}</strong>. Consulte ton dossier de réception dès maintenant !
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="/downloads/plan-action-rentree.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="plan-action-rentree-stratec-digital.pdf"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-xs bg-[#562C2C] hover:bg-[#127475] text-white shadow-md transition-all"
+                  >
+                    <Download className="w-4 h-4 text-[#F5DFBB]" />
+                    <span>Télécharger mon PDF directement</span>
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Image Screenshot */}
+          <div className="lg:col-span-5 relative order-1 lg:order-2">
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 group bg-slate-100">
+              <Image
+                src="/images/plan-action-rentree.webp"
+                alt="Plan d'action rentrée ressources gratuites Stratec Digital"
+                width={801}
+                height={607}
+                className="w-full h-auto object-cover group-hover:scale-103 transition-transform duration-500"
+              />
+              <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-md border border-[#F5DFBB] flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#127475]" />
+                <span className="text-xs font-extrabold text-[#562C2C]">Méthode 4 Étapes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

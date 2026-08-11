@@ -97,40 +97,28 @@ async function main() {
   }
   console.log("📦 Packs created/updated.");
 
-  // Seed Free Resources
   const freeResources = [
     {
-      slug: "guide-google-my-business-artisan",
-      title: "Guide Pratique : Fiche Google Business Profile pour Artisan",
-      category: "Guide PDF",
+      slug: "tuto-bouton-retractation",
+      title: "Ton tuto gratuit pour être en règle dès aujourd'hui (Bouton de rétractation)",
+      category: "Tuto Réglementaire",
       description:
-        "10 étapes simples pour optimiser ta visibilité locale sur Google Maps et capter des clients autour de chez toi sans dépenser un euro.",
-      image: "/images/handmakers.jpg",
-      downloadUrl: "https://www.stratec-digital.com/downloads/guide-google-my-business.pdf",
-      mailchimpTag: "gmb-artisan-pdf",
+        "Depuis le 19 juin 2026, la loi européenne exige un bouton de rétractation visible sur les sites e-commerce. Évite jusqu'à 75 000€ d'amende grâce à ce tuto simple.",
+      image: "/images/tuto-retractation.png",
+      downloadUrl: "/downloads/tuto-bouton-retractation.pdf",
+      mailchimpTag: "avocat-tuto",
       sortOrder: 1,
     },
     {
-      slug: "checklist-lancement-site-web",
-      title: "Checklist de Lancement de Ton Site Internet",
-      category: "Checklist",
+      slug: "plan-action-rentree",
+      title: "Ton plan d'action gratuit pour préparer ta rentrée",
+      category: "Plan d'action & Stratégie",
       description:
-        "Tout ce qu'il faut vérifier avant la mise en ligne : mentions légales, référencement, affichage mobile et formulaire de contact.",
-      image: "/images/artfolium.jpg",
-      downloadUrl: "https://www.stratec-digital.com/downloads/checklist-site-web.pdf",
-      mailchimpTag: "checklist-site-web",
+        "Profite du calme estival pour poser sereinement les bases de ta présence en ligne en 4 étapes simples, sans stress et sans jargon.",
+      image: "/images/plan-action-rentree.webp",
+      downloadUrl: "/downloads/plan-action-rentree.pdf",
+      mailchimpTag: "plan-rentree",
       sortOrder: 2,
-    },
-    {
-      slug: "calendrier-contenu-reseaux-sociaux",
-      title: "Calendrier de Contenu Réseaux Sociaux (1 mois d'idées)",
-      category: "Modèle Prêt-à-l'emploi",
-      description:
-        "Des idées de publications prêtes à personnaliser pour montrer ton savoir-faire d'artisan sans te creuser la tête chaque soir.",
-      image: "/images/spoolio/spoolio.webp",
-      downloadUrl: "https://www.stratec-digital.com/downloads/calendrier-reseaux-sociaux.pdf",
-      mailchimpTag: "calendrier-reseaux",
-      sortOrder: 3,
     },
   ];
 
@@ -334,7 +322,7 @@ J'ai donc conçu et orchestré l'ensemble de la structure digitale autour de cho
       ]),
       liveUrl: "https://guides-digitaux.com",
       featured: true,
-      sortOrder: 3,
+      sortOrder: 4,
     },
     {
       slug: "studiomacarons",
@@ -371,7 +359,7 @@ Une optimisation du contenu SEO pour la visibilité locale, des photos au format
       ]),
       liveUrl: "https://studiomacarons.fr",
       featured: true,
-      sortOrder: 4,
+      sortOrder: 3,
     },
     {
       slug: "linstant-brut",

@@ -6,21 +6,34 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, resourceTitle, resourceId } = await req.json();
+    const { name, email, resourceTitle, resourceId, tag, downloadUrl } = await req.json();
 
-    if (!email || !name) {
-      return NextResponse.json({ error: "Le prénom et l'email sont obligatoires." }, { status: 400 });
+    if (!email) {
+      return NextResponse.json({ error: "L'adresse email est obligatoire." }, { status: 400 });
     }
 
     const trimmedEmail = email.trim().toLowerCase();
+    const safeName = name && name.trim() ? name.trim() : trimmedEmail.split("@")[0];
+
+    // Determine target tag and downloadUrl if resourceId is provided
+    let mailchimpTag = tag || "ressource-gratuite";
+    let targetDownloadUrl = downloadUrl || null;
+
+    if (resourceId) {
+      const resource = await prisma.freeResource.findUnique({ where: { id: resourceId } });
+      if (resource) {
+        if (resource.mailchimpTag) mailchimpTag = resource.mailchimpTag;
+        if (resource.downloadUrl) targetDownloadUrl = resource.downloadUrl;
+      }
+    }
 
     // 1. Record lead in DB so Stephanie can track all resource downloads in Admin Leads panel
     const lead = await prisma.leadMessage.create({
       data: {
-        name,
+        name: safeName,
         email: trimmedEmail,
         serviceInterest: `Ressource Gratuite: ${resourceTitle || "Guide"}`,
-        message: `Demande d'envoi automatique de la ressource gratuite "${resourceTitle}". (Contact entré dans la boucle Mailchimp).`,
+        message: `Demande d'envoi automatique de la ressource gratuite "${resourceTitle}". Tag Mailchimp: ${mailchimpTag}.`,
         status: "NEW",
       },
     });
@@ -48,7 +61,7 @@ export async function POST(req: Request) {
             email_address: trimmedEmail,
             status_if_new: "subscribed",
             status: "subscribed",
-            merge_fields: { FNAME: name },
+            merge_fields: { FNAME: safeName },
           }),
         });
 
@@ -56,26 +69,27 @@ export async function POST(req: Request) {
           const mcError = await mcResponse.text();
           console.error("Mailchimp API Member Error:", mcError);
         } else {
-          console.log(`✅ Mailchimp subscriber ${trimmedEmail} successfully added/updated to list ${listId}!`);
+          console.log(`✅ Mailchimp subscriber ${trimmedEmail} successfully added/updated with tag [${mailchimpTag}]!`);
 
           // Add tags via Mailchimp /members/<hash>/tags endpoint
+          const tagsUrl = `https://${dc}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}/tags`;
+          const activeTags = [
+            { name: "ressource-gratuite", status: "active" },
+            { name: mailchimpTag, status: "active" },
+          ];
+
           if (resourceTitle) {
-            const tagsUrl = `https://${dc}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}/tags`;
-            const cleanTag = String(resourceTitle).slice(0, 50);
-            await fetch(tagsUrl, {
-              method: "POST",
-              headers: {
-                Authorization: authHeader,
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                tags: [
-                  { name: "ressource-gratuite", status: "active" },
-                  { name: cleanTag, status: "active" },
-                ],
-              }),
-            });
+            activeTags.push({ name: String(resourceTitle).slice(0, 50), status: "active" });
           }
+
+          await fetch(tagsUrl, {
+            method: "POST",
+            headers: {
+              Authorization: authHeader,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ tags: activeTags }),
+          });
         }
       } catch (mcErr) {
         console.error("Mailchimp fetch error:", mcErr);
@@ -84,8 +98,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Merci ! Ton inscription est bien enregistrée. Vérifie ta boîte mail sous peu.",
+      message: "Merci ! Ton inscription est bien enregistrée.",
       leadId: lead.id,
+      downloadUrl: targetDownloadUrl,
+      tag: mailchimpTag,
     });
   } catch (error) {
     console.error("Error subscribing resource:", error);

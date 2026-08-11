@@ -3,6 +3,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import TradeRotater from "@/components/TradeRotater";
 import YellowBrushUnderline from "@/components/YellowBrushUnderline";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import { Check, ArrowRight, ShieldCheck, Zap, Eye, Phone, Calendar, HeartHandshake, Compass, Sparkles, Mail } from "lucide-react";
 
 export const revalidate = 60; // ISR 60 seconds
@@ -12,8 +13,8 @@ export default async function HomePage() {
     orderBy: { sortOrder: "asc" },
   });
 
-  // Display "sur les réseaux" instead of "coaching-tranquille" on home page
-  const packs = allPacks.filter((p) => p.slug !== "coaching-tranquille").slice(0, 3);
+  // Display all 4 packs on home page
+  const packs = allPacks.slice(0, 4);
 
   const featuredProjects = await prisma.project.findMany({
     where: { featured: true },
@@ -129,12 +130,12 @@ export default async function HomePage() {
                 {/* Main Hero Card Container */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white border border-[#562C2C]/10 p-3 group">
                   <Image
-                    src="/images/BG_Head-Stef.webp"
+                    src="/images/BG_Head-Stef-gps.jpg"
                     alt="Stéphanie ROCQ Stratec Digital"
-                    width={560}
-                    height={520}
+                    width={682}
+                    height={1024}
                     priority
-                    className="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500"
+                    className="w-full max-h-[560px] object-cover object-top rounded-2xl group-hover:scale-102 transition-transform duration-500"
                   />
 
                   {/* Floating Top Badge */}
@@ -438,7 +439,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {packs.map((pack) => {
               let features: string[] = [];
               try {
@@ -452,8 +453,8 @@ export default async function HomePage() {
                   key={pack.id}
                   className={`bg-[#FAF4F2]/60 rounded-3xl p-8 border ${pack.popularBadge
                       ? "border-[#F2542D] shadow-xl ring-2 ring-[#F2542D]/20 relative bg-white"
-                      : "border-[#562C2C]/10 shadow-sm"
-                    } flex flex-col justify-between space-y-6`}
+                      : "border-[#562C2C]/10 shadow-sm hover:shadow-md"
+                    } flex flex-col justify-between space-y-6 transition-all`}
                 >
                   {pack.popularBadge && (
                     <span className="absolute -top-3.5 right-6 bg-[#F2542D] text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-xs">
@@ -461,7 +462,7 @@ export default async function HomePage() {
                     </span>
                   )}
                   <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-[#562C2C]">{pack.title}</h3>
+                    <h3 className="text-xl font-bold text-[#562C2C] leading-snug">{pack.title}</h3>
                     <p className="text-xs text-slate-500 font-semibold">{pack.audience}</p>
                     <div className="pt-2 flex flex-wrap items-baseline justify-between gap-2">
                       <div>
@@ -474,13 +475,13 @@ export default async function HomePage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-slate-600 pt-2">{pack.description}</p>
+                    <p className="text-sm text-slate-600 pt-1 leading-relaxed">{pack.description}</p>
 
-                    <ul className="space-y-2.5 text-xs text-slate-700 pt-4 border-t border-[#562C2C]/10">
+                    <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 pt-4 border-t border-[#562C2C]/10">
                       {features.slice(0, 4).map((f, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <Check className="w-4 h-4 text-[#0E9594] shrink-0 mt-0.5 stroke-[3]" />
-                          <span>{f}</span>
+                          <span className="leading-snug">{f}</span>
                         </li>
                       ))}
                     </ul>
@@ -556,6 +557,9 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* SECTION TESTIMONIALS CAROUSEL */}
+      <TestimonialsCarousel />
 
       {/* SECTION 7: FINAL CALL TO ACTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
