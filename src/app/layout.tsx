@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import MainLayout from "@/components/MainLayout";
 
@@ -51,6 +52,10 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${jakarta.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col antialiased bg-[#FAF4F2] text-slate-900 selection:bg-emerald-200 selection:text-emerald-900">
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LdGep4tAAAAALXgCbdUGx8TNwExONfFSeNoUOAz'}`}
+          strategy="afterInteractive"
+        />
         <MainLayout>{children}</MainLayout>
       </body>
     </html>

@@ -13,6 +13,7 @@ export default function ContactForm() {
     serviceInterest: "Pack Premiers pas digitaux",
     message: "",
     newsletter: false,
+    honeypot: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -24,10 +25,29 @@ export default function ContactForm() {
     setStatus(null);
 
     try {
+      let recaptchaToken = '';
+      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LdGep4tAAAAALXgCbdUGx8TNwExONfFSeNoUOAz';
+      if (typeof window !== 'undefined' && (window as any).grecaptcha && siteKey) {
+        try {
+          recaptchaToken = await new Promise<string>((resolve) => {
+            (window as any).grecaptcha.ready(async () => {
+              try {
+                const token = await (window as any).grecaptcha.execute(siteKey, { action: 'contact_submit' });
+                resolve(token);
+              } catch (e) {
+                resolve('');
+              }
+            });
+          });
+        } catch (e) {
+          console.warn('grecaptcha execution fallback:', e);
+        }
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       });
 
       const data = await res.json();
@@ -49,6 +69,7 @@ export default function ContactForm() {
         serviceInterest: "Pack Premiers pas digitaux",
         message: "",
         newsletter: false,
+        honeypot: "",
       });
     } catch (err: unknown) {
       const error = err as Error;
@@ -63,6 +84,18 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-8 sm:p-10 rounded-3xl border border-[#562C2C]/10 shadow-lg space-y-6">
+      {/* Hidden Honeypot Field for Bot Spam Prevention */}
+      <input
+        type="text"
+        name="website_url_hp"
+        value={formData.honeypot}
+        onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden opacity-0 pointer-events-none absolute -left-[9999px] w-0 h-0"
+      />
+
       <div className="space-y-2">
         <h3 className="text-2xl font-black text-[#562C2C]">T&apos;as un projet en tête ?</h3>
         <p className="text-sm text-slate-600">
