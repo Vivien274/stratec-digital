@@ -1,58 +1,34 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { verifyReCaptchaToken } from "@/lib/recaptcha";
+import { verifyAntiSpam } from "@/lib/antiSpam";
 import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 
-// In-memory rate limiting map for Stratec Digital (IP -> timestamps)
-const rateLimitMap = new Map<string, number[]>();
-
-function isRateLimited(ip: string, limitCount = 5, windowMs = 5 * 60 * 1000): boolean {
-  const now = Date.now();
-  const timestamps = rateLimitMap.get(ip) || [];
-  const validTimestamps = timestamps.filter(t => now - t < windowMs);
-
-  if (validTimestamps.length >= limitCount) {
-    return true;
-  }
-
-  validTimestamps.push(now);
-  rateLimitMap.set(ip, validTimestamps);
-  return false;
-}
-
 export async function POST(request: Request) {
   try {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
-
-    // 1. Anti-Spam Rate-Limiting (max 5 submissions per 5 minutes per IP)
-    if (isRateLimited(ip, 5, 5 * 60 * 1000)) {
-      return NextResponse.json(
-        { error: 'Trop de tentatives en peu de temps. Veuillez patienter 5 minutes.' },
-        { status: 429 }
-      );
-    }
-
     const body = await request.json();
     const { name, email, phone, activity, serviceInterest, message, newsletter, honeypot, recaptchaToken } = body;
 
-    // 2. Anti-Bot Honeypot Trap: if honeypot is filled out by automated bots, return fake success without database write
-    if (honeypot && honeypot.trim() !== '') {
-      console.warn(`[Anti-Spam Stratec Digital] Bot trap triggered by IP ${ip} (honeypot: "${honeypot}")`);
-      return NextResponse.json({ success: true, leadId: 'hp_blocked' });
-    }
+    // 1. Centralized Anti-Spam & Bot Verification
+    const antiSpamResult = await verifyAntiSpam({
+      ip,
+      email: email || '',
+      honeypot,
+      recaptchaToken,
+    });
 
-    // 3. Google reCAPTCHA v3 Verification (if token or secret key configured)
-    if (recaptchaToken || process.env.RECAPTCHA_SECRET_KEY) {
-      const captchaResult = await verifyReCaptchaToken(recaptchaToken);
-      if (!captchaResult.success) {
-        console.warn(`[Anti-Spam Stratec Digital] reCAPTCHA failed for IP ${ip}: ${captchaResult.error}`);
-        return NextResponse.json(
-          { error: captchaResult.error || 'Contrôle anti-robot échoué.' },
-          { status: 400 }
-        );
+    if (antiSpamResult.isSpam) {
+      if (antiSpamResult.isBotHoneypot || antiSpamResult.reason?.includes("automatisé") || antiSpamResult.reason?.includes("robot")) {
+        console.warn(`[Anti-Spam Contact] Silent drop of bot lead from IP ${ip}: ${email}`);
+        return NextResponse.json({ success: true, leadId: 'hp_blocked' });
       }
+
+      return NextResponse.json(
+        { error: antiSpamResult.reason || "Message refusé par le contrôle anti-spam." },
+        { status: 400 }
+      );
     }
 
     if (!name || !email || !message) {

@@ -30,6 +30,9 @@ interface FreeResourceItem {
 }
 
 export default function ResourcesGridClient({ resources }: { resources: FreeResourceItem[] }) {
+  // State for anti-bot honeypot trap
+  const [honeypot, setHoneypot] = useState("");
+
   // State for inline forms
   const [retractationEmail, setRetractationEmail] = useState("");
   const [retractationGdpr, setRetractationGdpr] = useState(false);
@@ -71,6 +74,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
           resourceTitle: "Tuto Bouton de rétractation obligatoire",
           tag: "avocat-tuto",
           downloadUrl: "/downloads/tuto-bouton-retractation.pdf",
+          honeypot,
         }),
       });
 
@@ -103,6 +107,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
           resourceTitle: "Plan d'action gratuit pour préparer ta rentrée",
           tag: "plan-rentree",
           downloadUrl: "/downloads/plan-action-rentree.pdf",
+          honeypot,
         }),
       });
 
@@ -146,6 +151,7 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
           email: modalEmail,
           resourceId: selectedResource.id,
           resourceTitle: selectedResource.title,
+          honeypot,
         }),
       });
 
@@ -241,6 +247,17 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
             {/* Form standard directly on page (No modal needed!) */}
             {!retractationSuccess ? (
               <form onSubmit={handleRetractationSubmit} className="space-y-4 pt-2">
+                {/* Anti-Bot Honeypot Invisible Trap Field */}
+                <input
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
                 {retractationError && (
                   <div className="p-3 rounded-xl bg-red-100 text-red-800 text-xs font-semibold">
                     {retractationError}
@@ -368,6 +385,17 @@ export default function ResourcesGridClient({ resources }: { resources: FreeReso
             {/* Inline Form */}
             {!rentreeSuccess ? (
               <form onSubmit={handleRentreeSubmit} className="space-y-4 pt-2">
+                {/* Anti-Bot Honeypot Invisible Trap Field */}
+                <input
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
                 {rentreeError && (
                   <div className="p-3 rounded-xl bg-red-100 text-red-800 text-xs font-semibold">
                     {rentreeError}

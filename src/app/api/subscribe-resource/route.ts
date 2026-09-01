@@ -1,18 +1,47 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifyAntiSpam } from "@/lib/antiSpam";
 import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, resourceTitle, resourceId, tag, downloadUrl } = await req.json();
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "127.0.0.1";
+    const body = await req.json();
+    const { name, email, resourceTitle, resourceId, tag, downloadUrl, honeypot, recaptchaToken } = body;
 
     if (!email) {
       return NextResponse.json({ error: "L'adresse email est obligatoire." }, { status: 400 });
     }
 
     const trimmedEmail = email.trim().toLowerCase();
+
+    // 1. Centralized Anti-Spam & Bot Check (Honeypot, Rate Limit, Spam Email Patterns & reCAPTCHA)
+    const antiSpamResult = await verifyAntiSpam({
+      ip,
+      email: trimmedEmail,
+      honeypot,
+      recaptchaToken,
+    });
+
+    if (antiSpamResult.isSpam) {
+      // If it's a bot (honeypot or spam pattern), return a silent fake success response without writing to DB or Mailchimp
+      if (antiSpamResult.isBotHoneypot || antiSpamResult.reason?.includes("automatisé") || antiSpamResult.reason?.includes("robot")) {
+        console.warn(`[Anti-Spam Blocked] Silent drop of bot lead from IP ${ip}: ${trimmedEmail}`);
+        return NextResponse.json({
+          success: true,
+          message: "Merci ! Ton inscription est bien enregistrée.",
+          downloadUrl: downloadUrl || "/downloads/tuto-bouton-retractation.pdf",
+        });
+      }
+
+      return NextResponse.json(
+        { error: antiSpamResult.reason || "Inscription refusée par le contrôle anti-spam." },
+        { status: 400 }
+      );
+    }
+
     const safeName = name && name.trim() ? name.trim() : trimmedEmail.split("@")[0];
 
     // Determine target tag and downloadUrl if resourceId is provided
@@ -27,7 +56,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // 1. Record lead in DB so Stephanie can track all resource downloads in Admin Leads panel
+    // 2. Record lead in DB so Stephanie can track all legitimate resource downloads in Admin Leads panel
     const lead = await prisma.leadMessage.create({
       data: {
         name: safeName,
@@ -38,7 +67,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // 2. Mailchimp API v3 Integration
+    // 3. Mailchimp API v3 Integration
     const apiKey = process.env.MAILCHIMP_API_KEY;
     const listId = process.env.MAILCHIMP_LIST_ID;
 
