@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Redirection 301 systématique de stratec-digital.fr vers https://stratec-digital.com
+  RewriteCond %{HTTP_HOST} ^(www\.)?stratec-digital\.fr$ [NC]
+  RewriteRule ^(.*)$ https://stratec-digital.com/$1 [L,R=301]
+
+  # 2. Redirection 301 des anciennes pages HTML vers le nouveau site Next.js
+  RewriteRule ^index\.html$ https://stratec-digital.com/ [L,R=301]
+  RewriteRule ^about\.html$ https://stratec-digital.com/qui-sommes-nous [L,R=301]
+  RewriteRule ^services-tarifs\.html$ https://stratec-digital.com/services-et-tarifs [L,R=301]
+  RewriteRule ^contact\.html$ https://stratec-digital.com/contact [L,R=301]
+  RewriteRule ^portfolio\.html$ https://stratec-digital.com/portfolio [L,R=301]
+  RewriteRule ^RGPDcookies\.html$ https://stratec-digital.com/rgpd-cookies [L,R=301]
+  RewriteRule ^mentionslegales\.html$ https://stratec-digital.com/mentions-legales [L,R=301]
+</IfModule>
