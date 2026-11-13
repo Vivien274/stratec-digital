@@ -6,9 +6,13 @@ import PortfolioGridClient from "@/components/PortfolioGridClient";
 export const revalidate = 60; // ISR 60s
 
 export const metadata = {
-  title: "Portfolio & Réalisations • Stratec Digital | Stéphanie ROCQ",
+  title: "Portfolio & Réalisations",
   description:
-    "Découvre les projets concrets réalisés pour des artisans, créateurs et indépendants : sites vitrine, boutiques en ligne, ateliers pâtisserie et référencement local.",
+    "Projets concrets de digitalisation pour artisans et créateurs.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function PortfolioPage() {

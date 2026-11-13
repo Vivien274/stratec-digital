@@ -26,7 +26,12 @@ const nextConfig = {
       },
       {
         source: '/about.html',
-        destination: '/qui-sommes-nous',
+        destination: '/a-propos',
+        permanent: true,
+      },
+      {
+        source: '/qui-sommes-nous',
+        destination: '/a-propos',
         permanent: true,
       },
       {

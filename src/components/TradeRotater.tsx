@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const phrases = [
-  "Consultante en digitalisation",
-  "Hauts-de-France & partout en France",
-  "Pour les artisans et créateurs",
+  "Référente accessibilité pour agences",
+  "Audits, formations & suivi mensuel",
+  "En visio & sur site en métropole lilloise",
 ];
 
 export default function TradeRotater() {
@@ -20,7 +20,7 @@ export default function TradeRotater() {
   }, []);
 
   return (
-    <span className="inline-block relative h-9 sm:h-10 md:h-11 w-full overflow-hidden align-middle">
+    <span className="inline-block relative h-9 sm:h-10 md:h-11 w-full overflow-hidden align-middle" aria-live="polite" aria-atomic="true">
       <AnimatePresence mode="wait">
         <motion.span
           key={phrases[index]}

@@ -21,6 +21,23 @@
   }
 }
 
+/* Accessible focus ring across all interactive elements (RGAA 10.7 / WCAG 2.4.7) */
+:focus-visible {
+  outline: 3px solid #127475 !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+/* Reduced motion preference (RGAA 13.8 / WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Crafto Custom Utilities with Stratec Brand Colors */
 .glass-header {
   background: rgba(250, 244, 242, 0.92);

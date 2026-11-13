@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Guide Interne : Cadrage & Sécurisation des Audits • Stéphanie ROCQ</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: #334155;
+      background: #FAF4F2;
+      line-height: 1.5;
+      font-size: 13px;
+      margin: 0;
+      padding: 24px;
+    }
+    
+    .sheet {
+      background: #FFFFFF;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 36px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(86, 44, 44, 0.08);
+      border: 1px solid rgba(86, 44, 44, 0.1);
+    }
+    
+    header {
+      border-bottom: 2px solid #F5DFBB;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .badge-internal {
+      background: #562C2C;
+      color: #F5DFBB;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    
+    h1 {
+      color: #562C2C;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 10px 0 4px 0;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      color: #127475;
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    h2 {
+      color: #562C2C;
+      font-size: 16px;
+      font-weight: 800;
+      border-left: 4px solid #C43219;
+      padding-left: 10px;
+      margin: 22px 0 10px 0;
+    }
+    
+    h3 {
+      color: #127475;
+      font-size: 13px;
+      font-weight: 700;
+      margin: 14px 0 6px 0;
+    }
+    
+    p {
+      margin: 0 0 10px 0;
+    }
+    
+    .alert-box {
+      background: #FFF6F0;
+      border-left: 4px solid #C43219;
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      font-size: 12px;
+    }
+    
+    .alert-box strong {
+      color: #C43219;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }
+    
+    th {
+      background: #562C2C;
+      color: #F5DFBB;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 10px;
+    }
+    
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #E2E8F0;
+      vertical-align: top;
+    }
+    
+    tr:nth-child(even) td {
+      background: #FAF4F2;
+    }
+    
+    .code-box {
+      background: #FAF4F2;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid #127475;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #1E293B;
+      margin: 10px 0;
+      white-space: pre-wrap;
+    }
+    
+    .btn-print {
+      display: block;
+      margin: 0 auto 16px auto;
+      background: #C43219;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    
+    @media print {
+      body {
+        background: #FFF;
+        padding: 0;
+      }
+      .sheet {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+      }
+      .btn-print {
+        display: none;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimer ou Enregistrer en PDF (Cmd + P)</button>
+
+  <div class="sheet">
+    <header>
+      <div>
+        <span class="badge-internal">CONFIDENTIEL • GUIDE INTERNE</span>
+        <h1>Cadrage, Juridique & Rentabilité des Audits</h1>
+        <p class="subtitle">Référentiel pratique pour Stéphanie ROCQ — Stratec Digital</p>
+      </div>
+      <div style="text-align: right; font-size: 11px; color: #64748B;">
+        Stratec Digital<br>Version 1.0 • 2026
+      </div>
+    </header>
+
+    <h2>1. La Règle d'Or Opérationnelle (Éviter le « Scope Creep »)</h2>
+    <p>Le plus grand danger d'un mini-audit à 450 € est de laisser le client s'imaginer qu'il achète un audit de certification légale à 106 critères.</p>
+    
+    <div class="alert-box">
+      <strong>Règle frontière absolue :</strong>
+      <br>• <strong>Mini-Audit Flash (450 € HT) :</strong> Diagnostic d'arbitrage. Vous pointez les 15 plus gros blocages sur 3 gabarits types. Temps alloué : <strong>3 à 4 heures max</strong>.
+      <br>• <strong>Audit Pré-Conformité (dès 1 200 € HT) :</strong> Audit exhaustif sur 8 à 12 gabarits pour préparer une certification ou répondre à un marché public. Temps alloué : <strong>12 à 15 heures</strong>.
+    </div>
+
+    <h2>2. Le Cadre Juridique Réel (En toute sérénité)</h2>
+    <ul>
+      <li><strong>Aucune certification d'État n'est obligatoire :</strong> Il n'existe pas d'ordre des auditeurs assermentés. N'importe quel professionnel compétent peut auditer selon le référentiel public de la DINUM (RGAA 4.1.2).</li>
+      <li><strong>L'éditeur du site est le SEUL responsable juridique :</strong> En vertu de l'article 47 de la loi n° 2005-102, c'est l'organisme ou l'entreprise propriétaire du site qui porte la responsabilité légale de sa déclaration, JAMAIS le consultant ou l'agence prestataire.</li>
+      <li><strong>Votre rôle :</strong> Vous fournissez l'expertise technique et le constat factuel ; le client prend ses décisions d'éditeur.</li>
+    </ul>
+
+    <h2>3. Tableau Comparatif des 3 Formules d'Audit</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>1. Mini-Audit Flash</th>
+          <th>2. Audit Pré-Conformité</th>
+          <th>3. Audit Sur-Mesure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tarif</strong></td>
+          <td><strong>450 € HT fixe</strong></td>
+          <td><strong>Dès 1 200 € HT</strong></td>
+          <td><strong>Dès 2 200 € HT (devis)</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Périmètre</strong></td>
+          <td><strong>3 gabarits max</strong></td>
+          <td><strong>8 à 10 gabarits</strong></td>
+          <td><strong>15+ gabarits / tunnels</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Critères testés</strong></td>
+          <td>~25 critères prioritaires</td>
+          <td>Critères A et AA essentiels</td>
+          <td>106 critères officiels RGAA</td>
+        </tr>
+        <tr>
+          <td><strong>Temps max</strong></td>
+          <td>3h30 à 4h00</td>
+          <td>12h à 15h</td>
+          <td>20h+</td>
+        </tr>
+        <tr>
+          <td><strong>Livrable</strong></td>
+          <td>Rapport Top 15 (5 à 8 pages)</td>
+          <td>Rapport complet + Grille Excel dev</td>
+          <td>Dossier officiel + modèle légal</td>
+        </tr>
+        <tr>
+          <td><strong>Débrief visio</strong></td>
+          <td>45 minutes</td>
+          <td>1h30 (design + dev)</td>
+          <td>2h00 + suivi d'étape</td>
+        </tr>
+        <tr>
+          <td><strong>Ce qui est exclu</strong></td>
+          <td>Taux %, déclaration légale</td>
+          <td>Réécriture de code source</td>
+          <td>Implémentation technique</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>4. Les 3 Clauses de Protection à Insérer dans Vos Devis</h2>
+    
+    <h3>Clause 1 : Définition stricte du Mini-Audit</h3>
+    <div class="code-box">« La prestation "Mini-Audit Flash" constitue un diagnostic ergonomique et technique préalable réalisé sur un échantillon strict de 3 (trois) gabarits définis conjointement. Ce diagnostic a pour vocation de prioriser les actions correctives majeures et ne saurait être assimilé à un audit de conformité légale au sens du RGAA 4.1.2, ni ouvrir droit à la délivrance d'un taux de conformité officiel opposable aux tiers. »</div>
+
+    <h3>Clause 2 : Non-ingérence et responsabilité du code</h3>
+    <div class="code-box">« Le prestataire intervient en qualité de conseil et de contrôle qualité externe. Le prestataire ne procède à aucune modification directe des fichiers sources, scripts ou bases de données du client. La responsabilité de l'implémentation technique des recommandations incombe exclusivement aux équipes de développement du client ou de son agence. »</div>
+
+    <h3>Clause 3 : Gabarits supplémentaires</h3>
+    <div class="code-box">« Tout gabarit ou page supplémentaire sollicité au-delà de l'échantillon initialement convenu fera l'objet d'une facturation complémentaire forfaitaire de 150 € HT par gabarit, sous réserve de faisabilité technique. »</div>
+
+    <h2>5. Réponses aux Objections & Demandes Pièges</h2>
+    <ul>
+      <li><strong>« Peux-tu regarder 2 pages de plus dans les 450 € ? »</strong><br>
+      👉 <em>« Le format flash est calibré sur 3 pages pour garantir un tarif serré à 450 €. Pour ajouter 2 pages, on peut soit remplacer 2 gabarits existants, soit ajouter une option à 150 € HT par gabarit pour garder la même rigueur d'analyse. »</em></li>
+      
+      <li><strong>« J'ai besoin d'une attestation de conformité officielle pour un appel d'offres »</strong><br>
+      👉 <em>« Une attestation officielle requiert de tester les 106 critères sur un échantillon complet. Pour cet objectif réglementaire précis, il faut vous orienter vers l'Audit de Pré-Conformité (dès 1 200 € HT), qui fournit la grille certifiable officielle. »</em></li>
+    </ul>
+
+  </div>
+</body>
+</html>
+
